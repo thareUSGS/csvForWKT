@@ -7,7 +7,7 @@ class WKTcrs:
 
     def __init__(self, path = None, filename='naifcodes_radii_m_wAsteroids_IAU2015.csv'):
         pathFile = path if path is not None else os.path.dirname(os.path.realpath(__file__)) + '/../data/'
-        self._df = pd.read_csv(pathFile+filename)  
+        self._df = pd.read_csv(pathFile+filename)               
         self._ellipsoid = None
         self._datum = None
         self._planetodetic = None
@@ -65,14 +65,13 @@ class WKTcrs:
         """ 
         # load the selected columns and rename them to match the required columns   
         ellipsoid = df[['Naif_id', 'Body','IAU2015_Semimajor','IAU2015_Axisb','IAU2015_Semiminor']]
-        ellipsoid = ellipsoid.rename(columns={"Naif_id": "code", "Body":"name", "IAU2015_Semimajor":"semiMajorAxis", "IAU2015_Axisb":"semiMedianAxis", "IAU2015_Semiminor":"semiMinorAxis"})
-
+        ellipsoid = ellipsoid.rename(columns={"Naif_id": "code", "Body":"name", "IAU2015_Semimajor":"semiMajorAxis", "IAU2015_Axisb":"semiMedianAxis", "IAU2015_Semiminor":"semiMinorAxis"})       
         # Add IAU authority as a vector
         ellipsoid.insert(0,"authority",['IAU']*len(df.Naif_id))
         # Add version as a vector
         ellipsoid.insert(1,"version",[2015]*len(df.Naif_id))
         # Create the code ID
-        ellipsoid.loc[:,'code'] *= 100
+        ellipsoid.loc[:,'code'] *= 100        
         # create the column name
         ellipsoid['name']= ellipsoid['name'].str[:] + ' (' + ellipsoid['version'].apply(str) + ')'
         # Add en empty inverse flatenning column
@@ -83,6 +82,8 @@ class WKTcrs:
         ellipsoid.loc[biaxialBody.index, 'semiMedianAxis'] = ""
         # sort by code
         ellipsoid = ellipsoid.sort_values(by='code')
+        ellipsoid = ellipsoid.astype({'code': int}) 
+
         return ellipsoid
 
     def __datum(self, df, ellipsoid):
@@ -98,7 +99,7 @@ class WKTcrs:
         * primeMeridianValue
         """
         # we create the fatum based on the ellipsoid
-        datum = ellipsoid[['authority','version','code','name']]
+        datum = ellipsoid[['authority','version','code','name']]                
         # We extract only the interesting columns from the CSV
         df_datum = df[['Body','origin_long_name','origin_lon_pos']]
         # we rename the columns to match the required columns
@@ -111,8 +112,8 @@ class WKTcrs:
         datum = datum[['authority','version','code','name','body','ellipsoid','primeMeridianName','primeMeridianValue']]
         # we sort by code
         datum = datum.sort_values(by='code')
-        # we save
-        return datum
+
+        return datum       
 
     def __splitDatumCase(self, df):
         # By default, each datum is ocentric. In an ocentric CRS, the longitude is always positive to East
@@ -202,8 +203,8 @@ class WKTcrs:
         df_proj.sort_values(by='code')    
         return df_proj
 
-    def process(self):
-        df = self._df.copy()
+    def process(self):              
+        df = self._df.copy()          
         df = self.__skipRecords(df)
         df = self.__processLongitudePositive(df)
         df = self.__processZeroLongitude(df)
@@ -212,7 +213,7 @@ class WKTcrs:
         self._planetodetic = self.__planetodetic(df, self._datum)
         self._projection = self.__projection(self._planetodetic)  
 
-    def save(self):
+    def save(self):       
         self._ellipsoid.to_csv(r'ellipsoid.csv', index = False)
         self._datum.to_csv(r'datum.csv', index = False)
         self._planetodetic.to_csv(r'planetodetic.csv', index = False)
