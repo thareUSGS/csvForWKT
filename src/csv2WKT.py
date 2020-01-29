@@ -180,7 +180,7 @@ class WKTcrs:
         ["IAU","2005",62, "Auto Stereographic", "Stereographic", "False_Easting", 0, "False_Northing", 0, "Central_Meridian", 0, "Scale_Factor", 1, "Latitude_Of_Origin", 0, np.nan, np.nan],        
         ["IAU","2005",64, "Auto Transverse Mercator", "Transverse_Mercator", "False_Easting", 0, "False_Northing", 0, "Central_Meridian", 0, "Scale_Factor", 0.9996, "Latitude_Of_Origin", 0, np.nan, np.nan],          
         ["IAU","2005",66, "Auto Orthographic", "Orthographic", "False_Easting", 0, "False_Northing", 0, "Central_Meridian", 0, "Latitude_Of_Origin", 90, np.nan, np.nan, np.nan, np.nan],         
-        ["IAU","2005",68, "Auto Equidistant_Cylindrical", "Equirectangular", "False_Easting", 0, "False_Northing", 0, "Central_Meridian", 180, "latitude_Of_Origin", 0, np.nan, np.nan, np.nan, np.nan],           
+        ["IAU","2005",68, "Auto Equirectangular", "Equirectangular", "False_Easting", 0, "False_Northing", 0, "Central_Meridian", 180, "latitude_Of_Origin", 0, np.nan, np.nan, np.nan, np.nan],           
         ["IAU","2005",70, "Auto Lambert_Conformal_Conic", "Lambert_Conformal_Conic_2SP", "False_Easting", 0, "False_Northing", 0, "Central_Meridian", 0, "Standard_Parallel_1", -20, "Standard_Parallel_2", 20, "latitude_Of_Origin", 0],          
         ["IAU","2005",72, "Auto Lambert_Azimuthal_Equal_Area", "Lambert_Azimuthal_Equal_Area", "False_Easting", 0, "False_Northing", 0, "Longitude_Of_Center", 0, "Latitude_Of_Center", 90, np.nan, np.nan, np.nan, np.nan],        
         ["IAU","2005",74, "Auto Mercator", "Mercator_1SP", "False_Easting", 0, "False_Northing", 0, "Central_Meridian", 0, "Scale_Factor", 1, np.nan, np.nan, np.nan, np.nan],            
