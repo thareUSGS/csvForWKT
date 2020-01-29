@@ -171,7 +171,7 @@ class WKTcrs:
         ["IAU","2005",14, "Sinusoidal, clon=0", "Sinusoidal", "False_Easting", 0, "False_Northing", 0, "Longitude_Of_Center", 0, np.nan, np.nan, np.nan, np.nan, np.nan, np.nan],        
         ["IAU","2005",16, "Sinusoidal, clon=180", "Sinusoidal", "False_Easting", 0, "False_Northing", 0, "Longitude_Of_Center", 180, np.nan, np.nan, np.nan, np.nan, np.nan, np.nan],         
         ["IAU","2005",18, "North Polar, clon=0","Stereographic", "False_Easting", 0, "False_Northing", 0, "Central_Meridian", 0, "Scale_Factor", 1, "Latitude_Of_Origin", 90, np.nan, np.nan],           
-        ["IAU","2005",20, "North Polar, clon=0","Stereographic", "False_Easting", 0, "False_Northing", 0, "Central_Meridian", 0, "Scale_Factor", 1, "Latitude_Of_Origin", -90, np.nan, np.nan],               
+        ["IAU","2005",20, "South Polar, clon=0","Stereographic", "False_Easting", 0, "False_Northing", 0, "Central_Meridian", 0, "Scale_Factor", 1, "Latitude_Of_Origin", -90, np.nan, np.nan],               
         ["IAU","2005",22, "Mollweide, clon=0", "Mollweide", "False_Easting", 0, "False_Northing", 0, "Central_Meridian", 0, np.nan, np.nan, np.nan, np.nan, np.nan, np.nan],         
         ["IAU","2005",24, "Mollweide, clon=180", "Mollweide", "False_Easting", 0, "False_Northing", 0, "Central_Meridian", 180, np.nan, np.nan, np.nan, np.nan, np.nan, np.nan],        
         ["IAU","2005",26, "Robinson, clon=0", "Robinson", "False_Easting", 0, "False_Northing", 0, "Longitude_Of_Center", 0, np.nan, np.nan, np.nan, np.nan, np.nan, np.nan],          
