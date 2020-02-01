@@ -1,166 +1,254 @@
 authority,version,code,name,datum,csType,longitudeDirection
-IAU,2015,1001,Sun (2015) / Ocentric,IAU:2015:1000,spherical,east
-IAU,2015,19900,Mercury (2015) / Ographic,IAU:2015:19900,ellipsoidal,west
-IAU,2015,19901,Mercury (2015) / Ocentric,IAU:2015:19900,spherical,east
-IAU,2015,29900,Venus (2015) / Ographic,IAU:2015:29900,ellipsoidal,east
-IAU,2015,29901,Venus (2015) / Ocentric,IAU:2015:29900,spherical,east
-IAU,2015,30101,Moon (2015) / Ocentric,IAU:2015:30100,spherical,east
-IAU,2015,39900,Earth (2015) / Ographic,IAU:2015:39900,ellipsoidal,east
-IAU,2015,39901,Earth (2015) / Ocentric,IAU:2015:39900,spherical,east
-IAU,2015,40100,Phobos (2015) / Ographic,IAU:2015:40100,ellipsoidal,west
-IAU,2015,40101,Phobos (2015) / Ocentric,IAU:2015:40100,spherical,east
-IAU,2015,40200,Deimos (2015) / Ographic,IAU:2015:40200,ellipsoidal,west
-IAU,2015,40201,Deimos (2015) / Ocentric,IAU:2015:40200,spherical,east
-IAU,2015,49900,Mars (2015) / Ographic,IAU:2015:49900,ellipsoidal,west
-IAU,2015,49901,Mars (2015) / Ocentric,IAU:2015:49900,spherical,east
-IAU,2015,50100,Io (2015) / Ographic,IAU:2015:50100,ellipsoidal,west
-IAU,2015,50101,Io (2015) / Ocentric,IAU:2015:50100,spherical,east
-IAU,2015,50200,Europa (2015) / Ographic,IAU:2015:50200,ellipsoidal,west
-IAU,2015,50201,Europa (2015) / Ocentric,IAU:2015:50200,spherical,east
-IAU,2015,50300,Ganymede (2015) / Ographic,IAU:2015:50300,ellipsoidal,west
-IAU,2015,50301,Ganymede (2015) / Ocentric,IAU:2015:50300,spherical,east
-IAU,2015,50400,Callisto (2015) / Ographic,IAU:2015:50400,ellipsoidal,west
-IAU,2015,50401,Callisto (2015) / Ocentric,IAU:2015:50400,spherical,east
-IAU,2015,50500,Amalthea (2015) / Ographic,IAU:2015:50500,ellipsoidal,west
-IAU,2015,50501,Amalthea (2015) / Ocentric,IAU:2015:50500,spherical,east
-IAU,2015,50601,Himalia (2015) / Ocentric,IAU:2015:50600,spherical,east
-IAU,2015,50701,Elara (2015) / Ocentric,IAU:2015:50700,spherical,east
-IAU,2015,50801,Pasiphae (2015) / Ocentric,IAU:2015:50800,spherical,east
-IAU,2015,50901,Sinope (2015) / Ocentric,IAU:2015:50900,spherical,east
-IAU,2015,51001,Lysithea (2015) / Ocentric,IAU:2015:51000,spherical,east
-IAU,2015,51101,Carme (2015) / Ocentric,IAU:2015:51100,spherical,east
-IAU,2015,51201,Ananke (2015) / Ocentric,IAU:2015:51200,spherical,east
-IAU,2015,51301,Leda (2015) / Ocentric,IAU:2015:51300,spherical,east
-IAU,2015,51400,Thebe (2015) / Ographic,IAU:2015:51400,ellipsoidal,west
-IAU,2015,51401,Thebe (2015) / Ocentric,IAU:2015:51400,spherical,east
-IAU,2015,51500,Adrastea (2015) / Ographic,IAU:2015:51500,ellipsoidal,west
-IAU,2015,51501,Adrastea (2015) / Ocentric,IAU:2015:51500,spherical,east
-IAU,2015,51600,Metis (2015) / Ographic,IAU:2015:51600,ellipsoidal,west
-IAU,2015,51601,Metis (2015) / Ocentric,IAU:2015:51600,spherical,east
-IAU,2015,59900,Jupiter (2015) / Ographic,IAU:2015:59900,ellipsoidal,west
-IAU,2015,59901,Jupiter (2015) / Ocentric,IAU:2015:59900,spherical,east
-IAU,2015,60100,Mimas (2015) / Ographic,IAU:2015:60100,ellipsoidal,west
-IAU,2015,60101,Mimas (2015) / Ocentric,IAU:2015:60100,spherical,east
-IAU,2015,60200,Enceladus (2015) / Ographic,IAU:2015:60200,ellipsoidal,west
-IAU,2015,60201,Enceladus (2015) / Ocentric,IAU:2015:60200,spherical,east
-IAU,2015,60300,Tethys (2015) / Ographic,IAU:2015:60300,ellipsoidal,west
-IAU,2015,60301,Tethys (2015) / Ocentric,IAU:2015:60300,spherical,east
-IAU,2015,60400,Dione (2015) / Ographic,IAU:2015:60400,ellipsoidal,west
-IAU,2015,60401,Dione (2015) / Ocentric,IAU:2015:60400,spherical,east
-IAU,2015,60500,Rhea (2015) / Ographic,IAU:2015:60500,ellipsoidal,west
-IAU,2015,60501,Rhea (2015) / Ocentric,IAU:2015:60500,spherical,east
-IAU,2015,60600,Titan (2015) / Ographic,IAU:2015:60600,ellipsoidal,west
-IAU,2015,60601,Titan (2015) / Ocentric,IAU:2015:60600,spherical,east
-IAU,2015,60701,Hyperion (2015) / Ocentric,IAU:2015:60700,spherical,east
-IAU,2015,60800,Iapetus (2015) / Ographic,IAU:2015:60800,ellipsoidal,west
-IAU,2015,60801,Iapetus (2015) / Ocentric,IAU:2015:60800,spherical,east
-IAU,2015,60900,Phoebe (2015) / Ographic,IAU:2015:60900,ellipsoidal,west
-IAU,2015,60901,Phoebe (2015) / Ocentric,IAU:2015:60900,spherical,east
-IAU,2015,61000,Janus (2015) / Ographic,IAU:2015:61000,ellipsoidal,west
-IAU,2015,61001,Janus (2015) / Ocentric,IAU:2015:61000,spherical,east
-IAU,2015,61100,Epimetheus (2015) / Ographic,IAU:2015:61100,ellipsoidal,west
-IAU,2015,61101,Epimetheus (2015) / Ocentric,IAU:2015:61100,spherical,east
-IAU,2015,61200,Helene (2015) / Ographic,IAU:2015:61200,ellipsoidal,west
-IAU,2015,61201,Helene (2015) / Ocentric,IAU:2015:61200,spherical,east
-IAU,2015,61300,Telesto (2015) / Ographic,IAU:2015:61300,ellipsoidal,west
-IAU,2015,61301,Telesto (2015) / Ocentric,IAU:2015:61300,spherical,east
-IAU,2015,61400,Calypso (2015) / Ographic,IAU:2015:61400,ellipsoidal,west
-IAU,2015,61401,Calypso (2015) / Ocentric,IAU:2015:61400,spherical,east
-IAU,2015,61500,Atlas (2015) / Ographic,IAU:2015:61500,ellipsoidal,west
-IAU,2015,61501,Atlas (2015) / Ocentric,IAU:2015:61500,spherical,east
-IAU,2015,61600,Prometheus (2015) / Ographic,IAU:2015:61600,ellipsoidal,west
-IAU,2015,61601,Prometheus (2015) / Ocentric,IAU:2015:61600,spherical,east
-IAU,2015,61700,Pandora (2015) / Ographic,IAU:2015:61700,ellipsoidal,west
-IAU,2015,61701,Pandora (2015) / Ocentric,IAU:2015:61700,spherical,east
-IAU,2015,61800,Pan (2015) / Ographic,IAU:2015:61800,ellipsoidal,west
-IAU,2015,61801,Pan (2015) / Ocentric,IAU:2015:61800,spherical,east
-IAU,2015,63201,Methone (2015) / Ocentric,IAU:2015:63200,spherical,east
-IAU,2015,63301,Pallene (2015) / Ocentric,IAU:2015:63300,spherical,east
-IAU,2015,63401,Polydeuces (2015) / Ocentric,IAU:2015:63400,spherical,east
-IAU,2015,63501,Daphnis (2015) / Ocentric,IAU:2015:63500,spherical,east
-IAU,2015,64901,Anthe (2015) / Ocentric,IAU:2015:64900,spherical,east
-IAU,2015,65301,Aegaeon (2015) / Ocentric,IAU:2015:65300,spherical,east
-IAU,2015,69900,Saturn (2015) / Ographic,IAU:2015:69900,ellipsoidal,west
-IAU,2015,69901,Saturn (2015) / Ocentric,IAU:2015:69900,spherical,east
-IAU,2015,70100,Ariel (2015) / Ographic,IAU:2015:70100,ellipsoidal,east
-IAU,2015,70101,Ariel (2015) / Ocentric,IAU:2015:70100,spherical,east
-IAU,2015,70200,Umbriel (2015) / Ographic,IAU:2015:70200,ellipsoidal,east
-IAU,2015,70201,Umbriel (2015) / Ocentric,IAU:2015:70200,spherical,east
-IAU,2015,70300,Titania (2015) / Ographic,IAU:2015:70300,ellipsoidal,east
-IAU,2015,70301,Titania (2015) / Ocentric,IAU:2015:70300,spherical,east
-IAU,2015,70400,Oberon (2015) / Ographic,IAU:2015:70400,ellipsoidal,east
-IAU,2015,70401,Oberon (2015) / Ocentric,IAU:2015:70400,spherical,east
-IAU,2015,70500,Miranda (2015) / Ographic,IAU:2015:70500,ellipsoidal,east
-IAU,2015,70501,Miranda (2015) / Ocentric,IAU:2015:70500,spherical,east
-IAU,2015,70600,Cordelia (2015) / Ographic,IAU:2015:70600,ellipsoidal,east
-IAU,2015,70601,Cordelia (2015) / Ocentric,IAU:2015:70600,spherical,east
-IAU,2015,70700,Ophelia (2015) / Ographic,IAU:2015:70700,ellipsoidal,east
-IAU,2015,70701,Ophelia (2015) / Ocentric,IAU:2015:70700,spherical,east
-IAU,2015,70800,Bianca (2015) / Ographic,IAU:2015:70800,ellipsoidal,east
-IAU,2015,70801,Bianca (2015) / Ocentric,IAU:2015:70800,spherical,east
-IAU,2015,70900,Cressida (2015) / Ographic,IAU:2015:70900,ellipsoidal,east
-IAU,2015,70901,Cressida (2015) / Ocentric,IAU:2015:70900,spherical,east
-IAU,2015,71000,Desdemona (2015) / Ographic,IAU:2015:71000,ellipsoidal,east
-IAU,2015,71001,Desdemona (2015) / Ocentric,IAU:2015:71000,spherical,east
-IAU,2015,71100,Juliet (2015) / Ographic,IAU:2015:71100,ellipsoidal,east
-IAU,2015,71101,Juliet (2015) / Ocentric,IAU:2015:71100,spherical,east
-IAU,2015,71200,Portia (2015) / Ographic,IAU:2015:71200,ellipsoidal,east
-IAU,2015,71201,Portia (2015) / Ocentric,IAU:2015:71200,spherical,east
-IAU,2015,71300,Rosalind (2015) / Ographic,IAU:2015:71300,ellipsoidal,east
-IAU,2015,71301,Rosalind (2015) / Ocentric,IAU:2015:71300,spherical,east
-IAU,2015,71400,Belinda (2015) / Ographic,IAU:2015:71400,ellipsoidal,east
-IAU,2015,71401,Belinda (2015) / Ocentric,IAU:2015:71400,spherical,east
-IAU,2015,71500,Puck (2015) / Ographic,IAU:2015:71500,ellipsoidal,east
-IAU,2015,71501,Puck (2015) / Ocentric,IAU:2015:71500,spherical,east
-IAU,2015,79900,Uranus (2015) / Ographic,IAU:2015:79900,ellipsoidal,east
-IAU,2015,79901,Uranus (2015) / Ocentric,IAU:2015:79900,spherical,east
-IAU,2015,80100,Triton (2015) / Ographic,IAU:2015:80100,ellipsoidal,east
-IAU,2015,80101,Triton (2015) / Ocentric,IAU:2015:80100,spherical,east
-IAU,2015,80201,Nereid (2015) / Ocentric,IAU:2015:80200,spherical,east
-IAU,2015,80300,Naiad (2015) / Ographic,IAU:2015:80300,ellipsoidal,west
-IAU,2015,80301,Naiad (2015) / Ocentric,IAU:2015:80300,spherical,east
-IAU,2015,80400,Thalassa (2015) / Ographic,IAU:2015:80400,ellipsoidal,west
-IAU,2015,80401,Thalassa (2015) / Ocentric,IAU:2015:80400,spherical,east
-IAU,2015,80500,Despina (2015) / Ographic,IAU:2015:80500,ellipsoidal,west
-IAU,2015,80501,Despina (2015) / Ocentric,IAU:2015:80500,spherical,east
-IAU,2015,80600,Galatea (2015) / Ographic,IAU:2015:80600,ellipsoidal,west
-IAU,2015,80601,Galatea (2015) / Ocentric,IAU:2015:80600,spherical,east
-IAU,2015,80700,Larissa (2015) / Ographic,IAU:2015:80700,ellipsoidal,west
-IAU,2015,80701,Larissa (2015) / Ocentric,IAU:2015:80700,spherical,east
-IAU,2015,80800,Proteus (2015) / Ographic,IAU:2015:80800,ellipsoidal,west
-IAU,2015,80801,Proteus (2015) / Ocentric,IAU:2015:80800,spherical,east
-IAU,2015,89900,Neptune (2015) / Ographic,IAU:2015:89900,ellipsoidal,west
-IAU,2015,89901,Neptune (2015) / Ocentric,IAU:2015:89900,spherical,east
-IAU,2015,90100,Charon (2015) / Ographic,IAU:2015:90100,ellipsoidal,west
-IAU,2015,90101,Charon (2015) / Ocentric,IAU:2015:90100,spherical,east
-IAU,2015,99900,Pluto (2015) / Ographic,IAU:2015:99900,ellipsoidal,west
-IAU,2015,99901,Pluto (2015) / Ocentric,IAU:2015:99900,spherical,east
-IAU,2015,100001200,Churyumov-Gerasimenko (2015) / Ographic,IAU:2015:100001200,ellipsoidal,west
-IAU,2015,100001201,Churyumov-Gerasimenko (2015) / Ocentric,IAU:2015:100001200,spherical,east
-IAU,2015,100003601,Halley (2015) / Ocentric,IAU:2015:100003600,spherical,east
-IAU,2015,100004101,Hartley 2 (2015) / Ocentric,IAU:2015:100004100,spherical,east
-IAU,2015,100010701,Wild 2 (2015) / Ocentric,IAU:2015:100010700,spherical,east
-IAU,2015,200000100,Ceres (2015) / Ographic,IAU:2015:200000100,ellipsoidal,west
-IAU,2015,200000101,Ceres (2015) / Ocentric,IAU:2015:200000100,spherical,east
-IAU,2015,200000400,Vesta (2015) / Ographic,IAU:2015:200000400,ellipsoidal,west
-IAU,2015,200000401,Vesta (2015) / Ocentric,IAU:2015:200000400,spherical,east
-IAU,2015,200001601,Psyche (2015) / Ocentric,IAU:2015:200001600,spherical,east
-IAU,2015,200002100,Lutetia (2015) / Ographic,IAU:2015:200002100,ellipsoidal,west
-IAU,2015,200002101,Lutetia (2015) / Ocentric,IAU:2015:200002100,spherical,east
-IAU,2015,200005200,52 Europa (2015) / Ographic,IAU:2015:200005200,ellipsoidal,west
-IAU,2015,200005201,52 Europa (2015) / Ocentric,IAU:2015:200005200,spherical,east
-IAU,2015,200021601,Kleopatra (2015) / Ocentric,IAU:2015:200021600,spherical,east
-IAU,2015,200025301,Mathilde (2015) / Ocentric,IAU:2015:200025300,spherical,east
-IAU,2015,200043300,Eros (2015) / Ographic,IAU:2015:200043300,ellipsoidal,west
-IAU,2015,200043301,Eros (2015) / Ocentric,IAU:2015:200043300,spherical,east
-IAU,2015,200051100,Davida (2015) / Ographic,IAU:2015:200051100,ellipsoidal,west
-IAU,2015,200051101,Davida (2015) / Ocentric,IAU:2015:200051100,spherical,east
-IAU,2015,200286700,Steins (2015) / Ographic,IAU:2015:200286700,ellipsoidal,west
-IAU,2015,200286701,Steins (2015) / Ocentric,IAU:2015:200286700,spherical,east
-IAU,2015,200417901,Toutatis (2015) / Ocentric,IAU:2015:200417900,spherical,east
-IAU,2015,202514300,Itokawa (2015) / Ographic,IAU:2015:202514300,ellipsoidal,west
-IAU,2015,202514301,Itokawa (2015) / Ocentric,IAU:2015:202514300,spherical,east
-IAU,2015,243101000,Ida (2015) / Ographic,IAU:2015:243101000,ellipsoidal,west
-IAU,2015,243101001,Ida (2015) / Ocentric,IAU:2015:243101000,spherical,east
-IAU,2015,951101000,Gaspra (2015) / Ographic,IAU:2015:951101000,ellipsoidal,west
-IAU,2015,951101001,Gaspra (2015) / Ocentric,IAU:2015:951101000,spherical,east
+IAU,2015,1000,Sun (2015) - Sphere / Ocentric,IAU:2015:1000,spherical,east
+IAU,2015,19900,Mercury (2015) - Sphere / Ocentric,IAU:2015:19900,spherical,east
+IAU,2015,19901,Mercury (2015) / Ographic,IAU:2015:19901,ellipsoidal,west
+IAU,2015,19902,Mercury (2015) / Ocentric,IAU:2015:19901,spherical,east
+IAU,2015,29900,Venus (2015) - Sphere / Ocentric,IAU:2015:29900,spherical,east
+IAU,2015,29901,Venus (2015) / Ographic,IAU:2015:29901,ellipsoidal,east
+IAU,2015,29902,Venus (2015) / Ocentric,IAU:2015:29901,spherical,east
+IAU,2015,30100,Moon (2015) - Sphere / Ocentric,IAU:2015:30100,spherical,east
+IAU,2015,39900,Earth (2015) - Sphere / Ocentric,IAU:2015:39900,spherical,east
+IAU,2015,39901,Earth (2015) / Ographic,IAU:2015:39901,ellipsoidal,east
+IAU,2015,39902,Earth (2015) / Ocentric,IAU:2015:39901,spherical,east
+IAU,2015,40100,Phobos (2015) - Sphere / Ocentric,IAU:2015:40100,spherical,east
+IAU,2015,40103,Phobos (2015) / Ographic,IAU:2015:40102,ellipsoidal,west
+IAU,2015,40104,Phobos (2015) / Ocentric,IAU:2015:40102,spherical,east
+IAU,2015,40200,Deimos (2015) - Sphere / Ocentric,IAU:2015:40200,spherical,east
+IAU,2015,40203,Deimos (2015) / Ographic,IAU:2015:40202,ellipsoidal,west
+IAU,2015,40204,Deimos (2015) / Ocentric,IAU:2015:40202,spherical,east
+IAU,2015,49900,Mars (2015) - Sphere / Ocentric,IAU:2015:49900,spherical,east
+IAU,2015,49901,Mars (2015) / Ographic,IAU:2015:49901,ellipsoidal,west
+IAU,2015,49902,Mars (2015) / Ocentric,IAU:2015:49901,spherical,east
+IAU,2015,50100,Io (2015) - Sphere / Ocentric,IAU:2015:50100,spherical,east
+IAU,2015,50103,Io (2015) / Ographic,IAU:2015:50102,ellipsoidal,west
+IAU,2015,50104,Io (2015) / Ocentric,IAU:2015:50102,spherical,east
+IAU,2015,50200,Europa (2015) - Sphere / Ocentric,IAU:2015:50200,spherical,east
+IAU,2015,50203,Europa (2015) / Ographic,IAU:2015:50202,ellipsoidal,west
+IAU,2015,50204,Europa (2015) / Ocentric,IAU:2015:50202,spherical,east
+IAU,2015,50300,Ganymede (2015) - Sphere / Ocentric,IAU:2015:50300,spherical,east
+IAU,2015,50301,Ganymede (2015) / Ographic,IAU:2015:50301,ellipsoidal,west
+IAU,2015,50302,Ganymede (2015) / Ocentric,IAU:2015:50301,spherical,east
+IAU,2015,50400,Callisto (2015) - Sphere / Ocentric,IAU:2015:50400,spherical,east
+IAU,2015,50401,Callisto (2015) / Ographic,IAU:2015:50401,ellipsoidal,west
+IAU,2015,50402,Callisto (2015) / Ocentric,IAU:2015:50401,spherical,east
+IAU,2015,50500,Amalthea (2015) - Sphere / Ocentric,IAU:2015:50500,spherical,east
+IAU,2015,50503,Amalthea (2015) / Ographic,IAU:2015:50502,ellipsoidal,west
+IAU,2015,50504,Amalthea (2015) / Ocentric,IAU:2015:50502,spherical,east
+IAU,2015,50600,Himalia (2015) - Sphere / Ocentric,IAU:2015:50600,spherical,east
+IAU,2015,50602,Himalia (2015) / Ocentric,IAU:2015:50601,spherical,east
+IAU,2015,50700,Elara (2015) - Sphere / Ocentric,IAU:2015:50700,spherical,east
+IAU,2015,50702,Elara (2015) / Ocentric,IAU:2015:50701,spherical,east
+IAU,2015,50800,Pasiphae (2015) - Sphere / Ocentric,IAU:2015:50800,spherical,east
+IAU,2015,50802,Pasiphae (2015) / Ocentric,IAU:2015:50801,spherical,east
+IAU,2015,50900,Sinope (2015) - Sphere / Ocentric,IAU:2015:50900,spherical,east
+IAU,2015,50902,Sinope (2015) / Ocentric,IAU:2015:50901,spherical,east
+IAU,2015,51000,Lysithea (2015) - Sphere / Ocentric,IAU:2015:51000,spherical,east
+IAU,2015,51002,Lysithea (2015) / Ocentric,IAU:2015:51001,spherical,east
+IAU,2015,51100,Carme (2015) - Sphere / Ocentric,IAU:2015:51100,spherical,east
+IAU,2015,51102,Carme (2015) / Ocentric,IAU:2015:51101,spherical,east
+IAU,2015,51200,Ananke (2015) - Sphere / Ocentric,IAU:2015:51200,spherical,east
+IAU,2015,51202,Ananke (2015) / Ocentric,IAU:2015:51201,spherical,east
+IAU,2015,51300,Leda (2015) - Sphere / Ocentric,IAU:2015:51300,spherical,east
+IAU,2015,51302,Leda (2015) / Ocentric,IAU:2015:51301,spherical,east
+IAU,2015,51400,Thebe (2015) - Sphere / Ocentric,IAU:2015:51400,spherical,east
+IAU,2015,51403,Thebe (2015) / Ographic,IAU:2015:51402,ellipsoidal,west
+IAU,2015,51404,Thebe (2015) / Ocentric,IAU:2015:51402,spherical,east
+IAU,2015,51500,Adrastea (2015) - Sphere / Ocentric,IAU:2015:51500,spherical,east
+IAU,2015,51503,Adrastea (2015) / Ographic,IAU:2015:51502,ellipsoidal,west
+IAU,2015,51504,Adrastea (2015) / Ocentric,IAU:2015:51502,spherical,east
+IAU,2015,51600,Metis (2015) - Sphere / Ocentric,IAU:2015:51600,spherical,east
+IAU,2015,51603,Metis (2015) / Ographic,IAU:2015:51602,ellipsoidal,west
+IAU,2015,51604,Metis (2015) / Ocentric,IAU:2015:51602,spherical,east
+IAU,2015,59900,Jupiter (2015) - Sphere / Ocentric,IAU:2015:59900,spherical,east
+IAU,2015,59901,Jupiter (2015) / Ographic,IAU:2015:59901,ellipsoidal,west
+IAU,2015,59902,Jupiter (2015) / Ocentric,IAU:2015:59901,spherical,east
+IAU,2015,60100,Mimas (2015) - Sphere / Ocentric,IAU:2015:60100,spherical,east
+IAU,2015,60103,Mimas (2015) / Ographic,IAU:2015:60102,ellipsoidal,west
+IAU,2015,60104,Mimas (2015) / Ocentric,IAU:2015:60102,spherical,east
+IAU,2015,60200,Enceladus (2015) - Sphere / Ocentric,IAU:2015:60200,spherical,east
+IAU,2015,60203,Enceladus (2015) / Ographic,IAU:2015:60202,ellipsoidal,west
+IAU,2015,60204,Enceladus (2015) / Ocentric,IAU:2015:60202,spherical,east
+IAU,2015,60300,Tethys (2015) - Sphere / Ocentric,IAU:2015:60300,spherical,east
+IAU,2015,60303,Tethys (2015) / Ographic,IAU:2015:60302,ellipsoidal,west
+IAU,2015,60304,Tethys (2015) / Ocentric,IAU:2015:60302,spherical,east
+IAU,2015,60400,Dione (2015) - Sphere / Ocentric,IAU:2015:60400,spherical,east
+IAU,2015,60403,Dione (2015) / Ographic,IAU:2015:60402,ellipsoidal,west
+IAU,2015,60404,Dione (2015) / Ocentric,IAU:2015:60402,spherical,east
+IAU,2015,60500,Rhea (2015) - Sphere / Ocentric,IAU:2015:60500,spherical,east
+IAU,2015,60503,Rhea (2015) / Ographic,IAU:2015:60502,ellipsoidal,west
+IAU,2015,60504,Rhea (2015) / Ocentric,IAU:2015:60502,spherical,east
+IAU,2015,60600,Titan (2015) - Sphere / Ocentric,IAU:2015:60600,spherical,east
+IAU,2015,60603,Titan (2015) / Ographic,IAU:2015:60602,ellipsoidal,west
+IAU,2015,60604,Titan (2015) / Ocentric,IAU:2015:60602,spherical,east
+IAU,2015,60700,Hyperion (2015) - Sphere / Ocentric,IAU:2015:60700,spherical,east
+IAU,2015,60704,Hyperion (2015) / Ocentric,IAU:2015:60702,spherical,east
+IAU,2015,60800,Iapetus (2015) - Sphere / Ocentric,IAU:2015:60800,spherical,east
+IAU,2015,60801,Iapetus (2015) / Ographic,IAU:2015:60801,ellipsoidal,west
+IAU,2015,60802,Iapetus (2015) / Ocentric,IAU:2015:60801,spherical,east
+IAU,2015,60900,Phoebe (2015) - Sphere / Ocentric,IAU:2015:60900,spherical,east
+IAU,2015,60903,Phoebe (2015) / Ographic,IAU:2015:60902,ellipsoidal,west
+IAU,2015,60904,Phoebe (2015) / Ocentric,IAU:2015:60902,spherical,east
+IAU,2015,61000,Janus (2015) - Sphere / Ocentric,IAU:2015:61000,spherical,east
+IAU,2015,61003,Janus (2015) / Ographic,IAU:2015:61002,ellipsoidal,west
+IAU,2015,61004,Janus (2015) / Ocentric,IAU:2015:61002,spherical,east
+IAU,2015,61100,Epimetheus (2015) - Sphere / Ocentric,IAU:2015:61100,spherical,east
+IAU,2015,61103,Epimetheus (2015) / Ographic,IAU:2015:61102,ellipsoidal,west
+IAU,2015,61104,Epimetheus (2015) / Ocentric,IAU:2015:61102,spherical,east
+IAU,2015,61200,Helene (2015) - Sphere / Ocentric,IAU:2015:61200,spherical,east
+IAU,2015,61203,Helene (2015) / Ographic,IAU:2015:61202,ellipsoidal,west
+IAU,2015,61204,Helene (2015) / Ocentric,IAU:2015:61202,spherical,east
+IAU,2015,61300,Telesto (2015) - Sphere / Ocentric,IAU:2015:61300,spherical,east
+IAU,2015,61303,Telesto (2015) / Ographic,IAU:2015:61302,ellipsoidal,west
+IAU,2015,61304,Telesto (2015) / Ocentric,IAU:2015:61302,spherical,east
+IAU,2015,61400,Calypso (2015) - Sphere / Ocentric,IAU:2015:61400,spherical,east
+IAU,2015,61403,Calypso (2015) / Ographic,IAU:2015:61402,ellipsoidal,west
+IAU,2015,61404,Calypso (2015) / Ocentric,IAU:2015:61402,spherical,east
+IAU,2015,61500,Atlas (2015) - Sphere / Ocentric,IAU:2015:61500,spherical,east
+IAU,2015,61503,Atlas (2015) / Ographic,IAU:2015:61502,ellipsoidal,west
+IAU,2015,61504,Atlas (2015) / Ocentric,IAU:2015:61502,spherical,east
+IAU,2015,61600,Prometheus (2015) - Sphere / Ocentric,IAU:2015:61600,spherical,east
+IAU,2015,61603,Prometheus (2015) / Ographic,IAU:2015:61602,ellipsoidal,west
+IAU,2015,61604,Prometheus (2015) / Ocentric,IAU:2015:61602,spherical,east
+IAU,2015,61700,Pandora (2015) - Sphere / Ocentric,IAU:2015:61700,spherical,east
+IAU,2015,61703,Pandora (2015) / Ographic,IAU:2015:61702,ellipsoidal,west
+IAU,2015,61704,Pandora (2015) / Ocentric,IAU:2015:61702,spherical,east
+IAU,2015,61800,Pan (2015) - Sphere / Ocentric,IAU:2015:61800,spherical,east
+IAU,2015,61803,Pan (2015) / Ographic,IAU:2015:61802,ellipsoidal,west
+IAU,2015,61804,Pan (2015) / Ocentric,IAU:2015:61802,spherical,east
+IAU,2015,63200,Methone (2015) - Sphere / Ocentric,IAU:2015:63200,spherical,east
+IAU,2015,63204,Methone (2015) / Ocentric,IAU:2015:63202,spherical,east
+IAU,2015,63300,Pallene (2015) - Sphere / Ocentric,IAU:2015:63300,spherical,east
+IAU,2015,63304,Pallene (2015) / Ocentric,IAU:2015:63302,spherical,east
+IAU,2015,63400,Polydeuces (2015) - Sphere / Ocentric,IAU:2015:63400,spherical,east
+IAU,2015,63404,Polydeuces (2015) / Ocentric,IAU:2015:63402,spherical,east
+IAU,2015,63500,Daphnis (2015) - Sphere / Ocentric,IAU:2015:63500,spherical,east
+IAU,2015,63504,Daphnis (2015) / Ocentric,IAU:2015:63502,spherical,east
+IAU,2015,64900,Anthe (2015) - Sphere / Ocentric,IAU:2015:64900,spherical,east
+IAU,2015,64902,Anthe (2015) / Ocentric,IAU:2015:64901,spherical,east
+IAU,2015,65300,Aegaeon (2015) - Sphere / Ocentric,IAU:2015:65300,spherical,east
+IAU,2015,65304,Aegaeon (2015) / Ocentric,IAU:2015:65302,spherical,east
+IAU,2015,69900,Saturn (2015) - Sphere / Ocentric,IAU:2015:69900,spherical,east
+IAU,2015,69901,Saturn (2015) / Ographic,IAU:2015:69901,ellipsoidal,west
+IAU,2015,69902,Saturn (2015) / Ocentric,IAU:2015:69901,spherical,east
+IAU,2015,70100,Ariel (2015) - Sphere / Ocentric,IAU:2015:70100,spherical,east
+IAU,2015,70103,Ariel (2015) / Ographic,IAU:2015:70102,ellipsoidal,east
+IAU,2015,70104,Ariel (2015) / Ocentric,IAU:2015:70102,spherical,east
+IAU,2015,70200,Umbriel (2015) - Sphere / Ocentric,IAU:2015:70200,spherical,east
+IAU,2015,70201,Umbriel (2015) / Ographic,IAU:2015:70201,ellipsoidal,east
+IAU,2015,70202,Umbriel (2015) / Ocentric,IAU:2015:70201,spherical,east
+IAU,2015,70300,Titania (2015) - Sphere / Ocentric,IAU:2015:70300,spherical,east
+IAU,2015,70301,Titania (2015) / Ographic,IAU:2015:70301,ellipsoidal,east
+IAU,2015,70302,Titania (2015) / Ocentric,IAU:2015:70301,spherical,east
+IAU,2015,70400,Oberon (2015) - Sphere / Ocentric,IAU:2015:70400,spherical,east
+IAU,2015,70401,Oberon (2015) / Ographic,IAU:2015:70401,ellipsoidal,east
+IAU,2015,70402,Oberon (2015) / Ocentric,IAU:2015:70401,spherical,east
+IAU,2015,70500,Miranda (2015) - Sphere / Ocentric,IAU:2015:70500,spherical,east
+IAU,2015,70503,Miranda (2015) / Ographic,IAU:2015:70502,ellipsoidal,east
+IAU,2015,70504,Miranda (2015) / Ocentric,IAU:2015:70502,spherical,east
+IAU,2015,70600,Cordelia (2015) - Sphere / Ocentric,IAU:2015:70600,spherical,east
+IAU,2015,70601,Cordelia (2015) / Ographic,IAU:2015:70601,ellipsoidal,east
+IAU,2015,70602,Cordelia (2015) / Ocentric,IAU:2015:70601,spherical,east
+IAU,2015,70700,Ophelia (2015) - Sphere / Ocentric,IAU:2015:70700,spherical,east
+IAU,2015,70701,Ophelia (2015) / Ographic,IAU:2015:70701,ellipsoidal,east
+IAU,2015,70702,Ophelia (2015) / Ocentric,IAU:2015:70701,spherical,east
+IAU,2015,70800,Bianca (2015) - Sphere / Ocentric,IAU:2015:70800,spherical,east
+IAU,2015,70801,Bianca (2015) / Ographic,IAU:2015:70801,ellipsoidal,east
+IAU,2015,70802,Bianca (2015) / Ocentric,IAU:2015:70801,spherical,east
+IAU,2015,70900,Cressida (2015) - Sphere / Ocentric,IAU:2015:70900,spherical,east
+IAU,2015,70901,Cressida (2015) / Ographic,IAU:2015:70901,ellipsoidal,east
+IAU,2015,70902,Cressida (2015) / Ocentric,IAU:2015:70901,spherical,east
+IAU,2015,71000,Desdemona (2015) - Sphere / Ocentric,IAU:2015:71000,spherical,east
+IAU,2015,71001,Desdemona (2015) / Ographic,IAU:2015:71001,ellipsoidal,east
+IAU,2015,71002,Desdemona (2015) / Ocentric,IAU:2015:71001,spherical,east
+IAU,2015,71100,Juliet (2015) - Sphere / Ocentric,IAU:2015:71100,spherical,east
+IAU,2015,71101,Juliet (2015) / Ographic,IAU:2015:71101,ellipsoidal,east
+IAU,2015,71102,Juliet (2015) / Ocentric,IAU:2015:71101,spherical,east
+IAU,2015,71200,Portia (2015) - Sphere / Ocentric,IAU:2015:71200,spherical,east
+IAU,2015,71201,Portia (2015) / Ographic,IAU:2015:71201,ellipsoidal,east
+IAU,2015,71202,Portia (2015) / Ocentric,IAU:2015:71201,spherical,east
+IAU,2015,71300,Rosalind (2015) - Sphere / Ocentric,IAU:2015:71300,spherical,east
+IAU,2015,71301,Rosalind (2015) / Ographic,IAU:2015:71301,ellipsoidal,east
+IAU,2015,71302,Rosalind (2015) / Ocentric,IAU:2015:71301,spherical,east
+IAU,2015,71400,Belinda (2015) - Sphere / Ocentric,IAU:2015:71400,spherical,east
+IAU,2015,71401,Belinda (2015) / Ographic,IAU:2015:71401,ellipsoidal,east
+IAU,2015,71402,Belinda (2015) / Ocentric,IAU:2015:71401,spherical,east
+IAU,2015,71500,Puck (2015) - Sphere / Ocentric,IAU:2015:71500,spherical,east
+IAU,2015,71501,Puck (2015) / Ographic,IAU:2015:71501,ellipsoidal,east
+IAU,2015,71502,Puck (2015) / Ocentric,IAU:2015:71501,spherical,east
+IAU,2015,79900,Uranus (2015) - Sphere / Ocentric,IAU:2015:79900,spherical,east
+IAU,2015,79901,Uranus (2015) / Ographic,IAU:2015:79901,ellipsoidal,east
+IAU,2015,79902,Uranus (2015) / Ocentric,IAU:2015:79901,spherical,east
+IAU,2015,80100,Triton (2015) - Sphere / Ocentric,IAU:2015:80100,spherical,east
+IAU,2015,80101,Triton (2015) / Ographic,IAU:2015:80101,ellipsoidal,east
+IAU,2015,80102,Triton (2015) / Ocentric,IAU:2015:80101,spherical,east
+IAU,2015,80200,Nereid (2015) - Sphere / Ocentric,IAU:2015:80200,spherical,east
+IAU,2015,80202,Nereid (2015) / Ocentric,IAU:2015:80201,spherical,east
+IAU,2015,80300,Naiad (2015) - Sphere / Ocentric,IAU:2015:80300,spherical,east
+IAU,2015,80301,Naiad (2015) / Ographic,IAU:2015:80301,ellipsoidal,west
+IAU,2015,80302,Naiad (2015) / Ocentric,IAU:2015:80301,spherical,east
+IAU,2015,80400,Thalassa (2015) - Sphere / Ocentric,IAU:2015:80400,spherical,east
+IAU,2015,80401,Thalassa (2015) / Ographic,IAU:2015:80401,ellipsoidal,west
+IAU,2015,80402,Thalassa (2015) / Ocentric,IAU:2015:80401,spherical,east
+IAU,2015,80500,Despina (2015) - Sphere / Ocentric,IAU:2015:80500,spherical,east
+IAU,2015,80501,Despina (2015) / Ographic,IAU:2015:80501,ellipsoidal,west
+IAU,2015,80502,Despina (2015) / Ocentric,IAU:2015:80501,spherical,east
+IAU,2015,80600,Galatea (2015) - Sphere / Ocentric,IAU:2015:80600,spherical,east
+IAU,2015,80601,Galatea (2015) / Ographic,IAU:2015:80601,ellipsoidal,west
+IAU,2015,80602,Galatea (2015) / Ocentric,IAU:2015:80601,spherical,east
+IAU,2015,80700,Larissa (2015) - Sphere / Ocentric,IAU:2015:80700,spherical,east
+IAU,2015,80701,Larissa (2015) / Ographic,IAU:2015:80701,ellipsoidal,west
+IAU,2015,80702,Larissa (2015) / Ocentric,IAU:2015:80701,spherical,east
+IAU,2015,80800,Proteus (2015) - Sphere / Ocentric,IAU:2015:80800,spherical,east
+IAU,2015,80803,Proteus (2015) / Ographic,IAU:2015:80802,ellipsoidal,west
+IAU,2015,80804,Proteus (2015) / Ocentric,IAU:2015:80802,spherical,east
+IAU,2015,89900,Neptune (2015) - Sphere / Ocentric,IAU:2015:89900,spherical,east
+IAU,2015,89901,Neptune (2015) / Ographic,IAU:2015:89901,ellipsoidal,west
+IAU,2015,89902,Neptune (2015) / Ocentric,IAU:2015:89901,spherical,east
+IAU,2015,90100,Charon (2015) - Sphere / Ocentric,IAU:2015:90100,spherical,east
+IAU,2015,90101,Charon (2015) / Ographic,IAU:2015:90101,ellipsoidal,west
+IAU,2015,90102,Charon (2015) / Ocentric,IAU:2015:90101,spherical,east
+IAU,2015,99900,Pluto (2015) - Sphere / Ocentric,IAU:2015:99900,spherical,east
+IAU,2015,99901,Pluto (2015) / Ographic,IAU:2015:99901,ellipsoidal,west
+IAU,2015,99902,Pluto (2015) / Ocentric,IAU:2015:99901,spherical,east
+IAU,2015,100001200,Churyumov-Gerasimenko (2015) - Sphere / Ocentric,IAU:2015:100001200,spherical,east
+IAU,2015,100001203,Churyumov-Gerasimenko (2015) / Ographic,IAU:2015:100001202,ellipsoidal,west
+IAU,2015,100001204,Churyumov-Gerasimenko (2015) / Ocentric,IAU:2015:100001202,spherical,east
+IAU,2015,100004100,Hartley 2 (2015) - Sphere / Ocentric,IAU:2015:100004100,spherical,east
+IAU,2015,100004102,Hartley 2 (2015) / Ocentric,IAU:2015:100004101,spherical,east
+IAU,2015,100010700,Wild 2 (2015) - Sphere / Ocentric,IAU:2015:100010700,spherical,east
+IAU,2015,100010704,Wild 2 (2015) / Ocentric,IAU:2015:100010702,spherical,east
+IAU,2015,200000100,Ceres (2015) - Sphere / Ocentric,IAU:2015:200000100,spherical,east
+IAU,2015,200000101,Ceres (2015) / Ographic,IAU:2015:200000101,ellipsoidal,west
+IAU,2015,200000102,Ceres (2015) / Ocentric,IAU:2015:200000101,spherical,east
+IAU,2015,200000400,Vesta (2015) - Sphere / Ocentric,IAU:2015:200000400,spherical,east
+IAU,2015,200000403,Vesta (2015) / Ographic,IAU:2015:200000402,ellipsoidal,west
+IAU,2015,200000404,Vesta (2015) / Ocentric,IAU:2015:200000402,spherical,east
+IAU,2015,200001600,Psyche (2015) - Sphere / Ocentric,IAU:2015:200001600,spherical,east
+IAU,2015,200001604,Psyche (2015) / Ocentric,IAU:2015:200001602,spherical,east
+IAU,2015,200002100,Lutetia (2015) - Sphere / Ocentric,IAU:2015:200002100,spherical,east
+IAU,2015,200002103,Lutetia (2015) / Ographic,IAU:2015:200002102,ellipsoidal,west
+IAU,2015,200002104,Lutetia (2015) / Ocentric,IAU:2015:200002102,spherical,east
+IAU,2015,200005200,52 Europa (2015) - Sphere / Ocentric,IAU:2015:200005200,spherical,east
+IAU,2015,200005203,52 Europa (2015) / Ographic,IAU:2015:200005202,ellipsoidal,west
+IAU,2015,200005204,52 Europa (2015) / Ocentric,IAU:2015:200005202,spherical,east
+IAU,2015,200021604,Kleopatra (2015) / Ocentric,IAU:2015:200021602,spherical,east
+IAU,2015,200025300,Mathilde (2015) - Sphere / Ocentric,IAU:2015:200025300,spherical,east
+IAU,2015,200025304,Mathilde (2015) / Ocentric,IAU:2015:200025302,spherical,east
+IAU,2015,200043300,Eros (2015) - Sphere / Ocentric,IAU:2015:200043300,spherical,east
+IAU,2015,200043301,Eros (2015) / Ographic,IAU:2015:200043301,ellipsoidal,west
+IAU,2015,200043302,Eros (2015) / Ocentric,IAU:2015:200043301,spherical,east
+IAU,2015,200051100,Davida (2015) - Sphere / Ocentric,IAU:2015:200051100,spherical,east
+IAU,2015,200051103,Davida (2015) / Ographic,IAU:2015:200051102,ellipsoidal,west
+IAU,2015,200051104,Davida (2015) / Ocentric,IAU:2015:200051102,spherical,east
+IAU,2015,200286700,Steins (2015) - Sphere / Ocentric,IAU:2015:200286700,spherical,east
+IAU,2015,200286703,Steins (2015) / Ographic,IAU:2015:200286702,ellipsoidal,west
+IAU,2015,200286704,Steins (2015) / Ocentric,IAU:2015:200286702,spherical,east
+IAU,2015,200417904,Toutatis (2015) / Ocentric,IAU:2015:200417902,spherical,east
+IAU,2015,202514303,Itokawa (2015) / Ographic,IAU:2015:202514302,ellipsoidal,west
+IAU,2015,202514304,Itokawa (2015) / Ocentric,IAU:2015:202514302,spherical,east
+IAU,2015,243101000,Ida (2015) - Sphere / Ocentric,IAU:2015:243101000,spherical,east
+IAU,2015,243101003,Ida (2015) / Ographic,IAU:2015:243101002,ellipsoidal,west
+IAU,2015,243101004,Ida (2015) / Ocentric,IAU:2015:243101002,spherical,east
+IAU,2015,951101000,Gaspra (2015) - Sphere / Ocentric,IAU:2015:951101000,spherical,east
+IAU,2015,951101003,Gaspra (2015) / Ographic,IAU:2015:951101002,ellipsoidal,west
+IAU,2015,951101004,Gaspra (2015) / Ocentric,IAU:2015:951101002,spherical,east

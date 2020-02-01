@@ -61,25 +61,84 @@ class WKTcrs:
         * inverseFlattening
 
         When the semiMedianAxis is empty then the ellipsoid is biaxial otherwise we consider a triaxial body with 
-        semi-minor < semiMedian (axisb) < semiMajor
+        semi-minor < semiMedian (axisb) < semiMajor   
+
+        General case:
+        -------------
+
+                                        /-----> sphere with semi-major radius(ellipse case)   /* interoperability */
+        bodies shape  ------>  sphere  /  OR
+                      |     (code: 00) \
+                      |                 \------> sphere with median radius(triaxial case)      /* interoperability */
+                      |AND
+                      |      /-----> ellipse /* Physics case for twoaxial bodies
+                      |_____/  OR    (code: 01) 
+                            \     
+                             \-----> triaxial /* Physics case for triaxial bodies
+                                     (code :02)
+
+        Special cases:
+        -------------
+        1/ sphere cannot be computed for triaxial case when IAU2015_Mean = -1
         """ 
         # load the selected columns and rename them to match the required columns   
-        ellipsoid = df[['Naif_id', 'Body','IAU2015_Semimajor','IAU2015_Axisb','IAU2015_Semiminor']]
-        ellipsoid = ellipsoid.rename(columns={"Naif_id": "code", "Body":"name", "IAU2015_Semimajor":"semiMajorAxis", "IAU2015_Axisb":"semiMedianAxis", "IAU2015_Semiminor":"semiMinorAxis"})       
+        ellipsoid = df[['Naif_id', 'Body','IAU2015_Semimajor','IAU2015_Axisb','IAU2015_Semiminor', 'IAU2015_Mean']]
+        ellipsoid = ellipsoid.rename(columns={"Naif_id": "code", "Body":"name", "IAU2015_Semimajor":"semiMajorAxis", "IAU2015_Axisb":"semiMedianAxis", "IAU2015_Semiminor":"semiMinorAxis"})
+        ellipsoid['Naif_id'] = ellipsoid['code']
+        # duplicate rows for handling code 00, 01, 02
+        ellipsoid = ellipsoid.append([ellipsoid]*2,ignore_index=True)
         # Add IAU authority as a vector
-        ellipsoid.insert(0,"authority",['IAU']*len(df.Naif_id))
+        ellipsoid.insert(0,"authority",['IAU']*len(ellipsoid.code))
         # Add version as a vector
-        ellipsoid.insert(1,"version",[2015]*len(df.Naif_id))
-        # Create the code ID
-        ellipsoid.loc[:,'code'] *= 100        
-        # create the column name
-        ellipsoid['name']= ellipsoid['name'].str[:] + ' (' + ellipsoid['version'].apply(str) + ')'
+        ellipsoid.insert(1,"version",[2015]*len(ellipsoid.code))
         # Add en empty inverse flatenning column
         ellipsoid = ellipsoid.assign(inverseFlatenning="")
-        # Get all biaxial bodies
-        biaxialBody = ellipsoid.query("semiMajorAxis == semiMedianAxis or semiMajorAxis == semiMinorAxis")
-        # set empty the semiMedianAxis (or axisb)for biaxial bodies (having a semiMedianAxis means we have a triaxial axis)
-        ellipsoid.loc[biaxialBody.index, 'semiMedianAxis'] = ""
+
+
+        # Create cases
+        ellipsoid.loc[0::3,'type'] = 'SPHERE'
+        ellipsoid.loc[0::3,'code'] *= 100 
+        ellipsoid.loc[0::3,'name']= ellipsoid.loc[0::3, 'name'].str[:] + ' (' + ellipsoid.loc[0::3, 'version'].apply(str) + ') - Sphere'
+
+        ellipsoid.loc[1::3,'type'] = 'ELLIPSE'
+        ellipsoid.loc[1::3,'code'] = ellipsoid.loc[1::3,'code'] * 100 + 1
+        ellipsoid.loc[1::3,'name'] = ellipsoid.loc[1::3, 'name'].str[:] + ' (' + ellipsoid.loc[1::3, 'version'].apply(str) + ')'         
+
+        ellipsoid.loc[2::3,'type'] = 'TRIAXIAL'
+        ellipsoid.loc[2::3,'code'] =  ellipsoid.loc[2::3,'code'] * 100 + 2
+        ellipsoid.loc[2::3,'name'] = ellipsoid.loc[2::3, 'name'].str[:] + ' (' + ellipsoid.loc[2::3, 'version'].apply(str) + ')'  
+
+        # Spherical case
+            # set mean radius for triaxial bodies
+        triaxialBodies = ellipsoid.query("semiMajorAxis != semiMedianAxis and semiMinorAxis != semiMedianAxis and type == 'SPHERE'")            
+        ellipsoid.loc[triaxialBodies.index, 'semiMajorAxis'] = ellipsoid.loc[triaxialBodies.index, 'IAU2015_Mean']
+        ellipsoid.loc[triaxialBodies.index, 'semiMinorAxis'] = ellipsoid.loc[triaxialBodies.index, 'IAU2015_Mean']
+        ellipsoid.loc[triaxialBodies.index, 'semiMedianAxis'] = ""
+           # set semi major radius for ellipse bodies
+        sphere = ellipsoid.query("type == 'SPHERE'")   
+        noTriaxialBodies_index = pd.Index(list(set(sphere.index.tolist()).difference(set(triaxialBodies.index.tolist()))))
+        ellipsoid.loc[noTriaxialBodies_index, 'semiMinorAxis'] = ellipsoid.loc[noTriaxialBodies_index, 'semiMajorAxis']
+        ellipsoid.loc[noTriaxialBodies_index, 'semiMedianAxis'] = ""
+          
+
+        # Ellipse case
+        triaxialBodies = ellipsoid.query("semiMajorAxis != semiMedianAxis and semiMinorAxis != semiMedianAxis and type == 'ELLIPSE'")    
+        ellipse = ellipsoid.query("type == 'ELLIPSE'")   
+        noTriaxialBodies_index = pd.Index(list(set(ellipse.index.tolist()).difference(set(triaxialBodies.index.tolist()))))         
+        ellipsoid.loc[noTriaxialBodies_index, 'semiMedianAxis'] = ""
+        ellipsoid = ellipsoid.drop(triaxialBodies.index) 
+
+        # Triaxial case
+        triaxialBodies = ellipsoid.query("semiMajorAxis != semiMedianAxis and semiMinorAxis != semiMedianAxis and type == 'TRIAXIAL'")    
+        triaxial = ellipsoid.query("type == 'TRIAXIAL'")   
+        noTriaxialBodies_index = pd.Index(list(set(triaxial.index.tolist()).difference(set(triaxialBodies.index.tolist()))))         
+        ellipsoid = ellipsoid.drop(noTriaxialBodies_index) 
+
+        # Exceptions to the general cases         
+           # case1 => cannot convert for interoperability
+        triaxialBodyNotConvertToSphere = ellipsoid.query("IAU2015_Mean == -1 and type != 'TRIAXIAL'")
+        ellipsoid = ellipsoid.drop(triaxialBodyNotConvertToSphere.index) 
+
         # sort by code
         ellipsoid = ellipsoid.sort_values(by='code')
         ellipsoid = ellipsoid.astype({'code': int}) 
@@ -99,17 +158,17 @@ class WKTcrs:
         * primeMeridianValue
         """
         # we create the fatum based on the ellipsoid
-        datum = ellipsoid[['authority','version','code','name']]                
+        datum = ellipsoid[['Naif_id', 'type', 'authority','version','code','name']]                
         # We extract only the interesting columns from the CSV
-        df_datum = df[['Body','origin_long_name','origin_lon_pos']]
+        df_datum = df[['Naif_id', 'Body','origin_long_name','origin_lon_pos']]
         # we rename the columns to match the required columns
         df_datum = df_datum.rename(columns={"Body": "body", "origin_long_name":"primeMeridianName", "origin_lon_pos":"primeMeridianValue"})
         # we merge the two tables by adding columns from the first table to the second table
-        datum = pd.concat([datum, df_datum], axis=1, sort=False, join='inner')    
+        datum = pd.merge(datum, df_datum, on='Naif_id')    
         # we add the link to the ellipsoid
         datum['ellipsoid'] = datum['authority'].apply(str) + ':' + datum['version'].apply(str) + ':' + datum['code'].apply(str)
         # we reorganize the columns
-        datum = datum[['authority','version','code','name','body','ellipsoid','primeMeridianName','primeMeridianValue']]
+        datum = datum[['Naif_id', 'type','authority','version','code','name','body','ellipsoid','primeMeridianName','primeMeridianValue']]
         # we sort by code
         datum = datum.sort_values(by='code')
 
@@ -128,7 +187,7 @@ class WKTcrs:
     def __planetodetic(self, df, datum):
         """
         Planetodetic could be ocentric or ographic. ocentric has csType=spherical where as ographic has csType=ellipsoidal
-
+        ocentric as even values" and "ographic as odd"
         Information:
         * authority
         * version
@@ -136,21 +195,59 @@ class WKTcrs:
         * name
         * datum
         * csType (ellipsoidal or spherical)
-        * longitudeDirection
+        * longitudeDirection 
+
+        xxx00 => Ocentric on a Sphere. If triaxial use Mean, even if elliptical use Semi-major axis as a sphere, Always East.
+        xxx01 => Ographic on ellipse (West or East, depending on body rotation)
+        xxx02 => Ocentric on ellipse (always East)
+        xxx03 => Ographic on Triaxial, (West or East, depending on body rotation)
+        xxx04 => Ocentric on Triaxial, East (for more advanced applications, not for map projections, like ISIS3, VICAR, ...)               
         """
         df = df.rename(columns={'rotation':'longitudeDirection'})
-        df_planeto = pd.concat([datum[['authority','version','code','name','ellipsoid']], df[['longitudeDirection','Body']]], axis=1, sort=False, join='inner')    
+        df_planeto = pd.merge(datum[['Naif_id','authority','version','code','name','ellipsoid','type']], df[['Naif_id','longitudeDirection','Body']], on='Naif_id')
+
         ographic, ocentric = self.__splitDatumCase(df_planeto)    
+                
+        historicalReasons = ocentric.query("(Body == 'Sun' or Body == 'Moon') and type != 'SPHERE'")
+        ocentric = ocentric.drop(historicalReasons.index)
+
+        # a small processing to have ocentic with even code
+        sphere = ocentric.query("type == 'SPHERE'")
+        ocentric.loc[sphere.index, 'code'] = ocentric.loc[sphere.index, 'Naif_id'] * 100
+        ocentric.loc[sphere.index, 'id'] = 0
+
+        ellipse = ocentric.query("type == 'ELLIPSE'")
+        ocentric.loc[ellipse.index, 'code'] = ocentric.loc[ellipse.index, 'Naif_id'] * 100 +2
+        ocentric.loc[ellipse.index, 'id'] = 2
+
+        triaxial = ocentric.query("type == 'TRIAXIAL'")
+        ocentric.loc[triaxial.index, 'code'] = ocentric.loc[triaxial.index, 'Naif_id'] * 100 +4
+        ocentric.loc[triaxial.index, 'id'] = 4
+
         ocentric['longitudeDirection'] = 'east'
         ocentric.insert(5, 'csType', 'spherical')
-        ocentric.loc[:,'code'] += 1
-        ocentric['name']= ocentric['name'].str[:] + ' / Ocentric'  
+        ocentric['name']= ocentric['name'].str[:] + ' / Ocentric'
+        
+        sphereEast = ographic.query("type == 'SPHERE'")
+        ographic = ographic.drop(sphereEast.index)
+        
+        # small processing ofr ographic code
+        ellipse = ographic.query("type == 'ELLIPSE'")
+        ographic.loc[ellipse.index, 'code'] = ocentric.loc[ellipse.index, 'Naif_id'] * 100 +1
+        ographic.loc[ellipse.index, 'id'] = 1
+
+        triaxial = ographic.query("type == 'TRIAXIAL'")
+        ographic.loc[triaxial.index, 'code'] = ographic.loc[triaxial.index, 'Naif_id'] * 100 +3
+        ographic.loc[triaxial.index, 'id'] = 3
+
         ographic.insert(5, 'csType', 'ellipsoidal')
         ographic['name']= ographic['name'].str[:] + ' / Ographic'
-        odetic = pd.concat([ocentric,ographic])
+
+        odetic = pd.concat([ocentric, ographic])
         odetic = odetic.rename(columns={'ellipsoid':'datum'})
         odetic = odetic.drop(columns=['Body'])    
         odetic = odetic.sort_values(by='code')
+        odetic = odetic.astype({'code': int})
         return odetic
 
     def __projection(self, planetodetic):
@@ -166,52 +263,85 @@ class WKTcrs:
         * parameterValue
         """
         data = [        
-        ["IAU","2005",10, "Equirectangular, clon=0", "Equirectangular", "False_Easting", 0, "False_Northing", 0, "Central_Meridian", 0, "latitude_Of_Origin", 0, np.nan, np.nan, np.nan, np.nan],        
-        ["IAU","2005",12, "Equirectangular, clon=180", "Equirectangular", "False_Easting", 0, "False_Northing", 0, "Central_Meridian", 180, "latitude_Of_Origin", 0, np.nan, np.nan, np.nan, np.nan],           
-        ["IAU","2005",14, "Sinusoidal, clon=0", "Sinusoidal", "False_Easting", 0, "False_Northing", 0, "Longitude_Of_Center", 0, np.nan, np.nan, np.nan, np.nan, np.nan, np.nan],        
-        ["IAU","2005",16, "Sinusoidal, clon=180", "Sinusoidal", "False_Easting", 0, "False_Northing", 0, "Longitude_Of_Center", 180, np.nan, np.nan, np.nan, np.nan, np.nan, np.nan],         
-        ["IAU","2005",18, "North Polar, clon=0","Stereographic", "False_Easting", 0, "False_Northing", 0, "Central_Meridian", 0, "Scale_Factor", 1, "Latitude_Of_Origin", 90, np.nan, np.nan],           
-        ["IAU","2005",20, "South Polar, clon=0","Stereographic", "False_Easting", 0, "False_Northing", 0, "Central_Meridian", 0, "Scale_Factor", 1, "Latitude_Of_Origin", -90, np.nan, np.nan],               
-        ["IAU","2005",22, "Mollweide, clon=0", "Mollweide", "False_Easting", 0, "False_Northing", 0, "Central_Meridian", 0, np.nan, np.nan, np.nan, np.nan, np.nan, np.nan],         
-        ["IAU","2005",24, "Mollweide, clon=180", "Mollweide", "False_Easting", 0, "False_Northing", 0, "Central_Meridian", 180, np.nan, np.nan, np.nan, np.nan, np.nan, np.nan],        
-        ["IAU","2005",26, "Robinson, clon=0", "Robinson", "False_Easting", 0, "False_Northing", 0, "Longitude_Of_Center", 0, np.nan, np.nan, np.nan, np.nan, np.nan, np.nan],          
-        ["IAU","2005",28, "Robinson, clon=180", "Robinson", "False_Easting", 0, "False_Northing", 0, "Longitude_Of_Center", 180, np.nan, np.nan, np.nan, np.nan, np.nan, np.nan],          
-        ["IAU","2005",60, "Auto Sinusoidal", "Sinusoidal", "False_Easting", 0, "False_Northing", 0, "Longitude_Of_Center", 0, np.nan, np.nan, np.nan, np.nan, np.nan, np.nan],                
-        ["IAU","2005",62, "Auto Stereographic", "Stereographic", "False_Easting", 0, "False_Northing", 0, "Central_Meridian", 0, "Scale_Factor", 1, "Latitude_Of_Origin", 0, np.nan, np.nan],        
-        ["IAU","2005",64, "Auto Transverse Mercator", "Transverse_Mercator", "False_Easting", 0, "False_Northing", 0, "Central_Meridian", 0, "Scale_Factor", 0.9996, "Latitude_Of_Origin", 0, np.nan, np.nan],          
-        ["IAU","2005",66, "Auto Orthographic", "Orthographic", "False_Easting", 0, "False_Northing", 0, "Central_Meridian", 0, "Latitude_Of_Origin", 90, np.nan, np.nan, np.nan, np.nan],         
-        ["IAU","2005",68, "Auto Equirectangular", "Equirectangular", "False_Easting", 0, "False_Northing", 0, "Central_Meridian", 180, "latitude_Of_Origin", 0, np.nan, np.nan, np.nan, np.nan],           
-        ["IAU","2005",70, "Auto Lambert_Conformal_Conic", "Lambert_Conformal_Conic_2SP", "False_Easting", 0, "False_Northing", 0, "Central_Meridian", 0, "Standard_Parallel_1", -20, "Standard_Parallel_2", 20, "latitude_Of_Origin", 0],          
-        ["IAU","2005",72, "Auto Lambert_Azimuthal_Equal_Area", "Lambert_Azimuthal_Equal_Area", "False_Easting", 0, "False_Northing", 0, "Longitude_Of_Center", 0, "Latitude_Of_Center", 90, np.nan, np.nan, np.nan, np.nan],        
-        ["IAU","2005",74, "Auto Mercator", "Mercator_1SP", "False_Easting", 0, "False_Northing", 0, "Central_Meridian", 0, "Scale_Factor", 1, np.nan, np.nan, np.nan, np.nan],            
-        ["IAU","2005",76, "Auto Albers", "Albers_Conic_Equal_Area", "False_Easting", 0, "False_Northing", 0, "Longitude_Of_Center", 0, "Standard_Parallel_1", 60, "Standard_Parallel_2", 20, "Latitude_Of_Center", 40],                    
-        ["IAU","2005",80, "Auto Mollweide", "Mollweide", "False_Easting", 0, "False_Northing", 0, "Central_Meridian", 0, np.nan, np.nan, np.nan, np.nan, np.nan, np.nan],            
-        ["IAU","2005",82, "Auto Robinson", "Robinson", "False_Easting", 0, "False_Northing", 0, "Longitude_Of_Center", 0, np.nan, np.nan, np.nan, np.nan, np.nan, np.nan]                                    
+        [10, "IAU","2005",0, "Equirectangular, clon=0", "Equirectangular", "False_Easting", 0, "False_Northing", 0, "Central_Meridian", 0, "latitude_Of_Origin", 0, np.nan, np.nan, np.nan, np.nan],        
+        [11, "IAU","2005",1, "Equirectangular, clon=0", "Equirectangular", "False_Easting", 0, "False_Northing", 0, "Central_Meridian", 0, "latitude_Of_Origin", 0, np.nan, np.nan, np.nan, np.nan],        
+        [12, "IAU","2005",2, "Equirectangular, clon=0", "Equirectangular", "False_Easting", 0, "False_Northing", 0, "Central_Meridian", 0, "latitude_Of_Origin", 0, np.nan, np.nan, np.nan, np.nan],        
+        [13, "IAU","2005",3, "Equirectangular, clon=0", "Equirectangular", "False_Easting", 0, "False_Northing", 0, "Central_Meridian", 0, "latitude_Of_Origin", 0, np.nan, np.nan, np.nan, np.nan],        
+        [14, "IAU","2005",4, "Equirectangular, clon=0", "Equirectangular", "False_Easting", 0, "False_Northing", 0, "Central_Meridian", 0, "latitude_Of_Origin", 0, np.nan, np.nan, np.nan, np.nan],        
+        [15, "IAU","2005",0, "Equirectangular, clon=180", "Equirectangular", "False_Easting", 0, "False_Northing", 0, "Central_Meridian", 180, "latitude_Of_Origin", 0, np.nan, np.nan, np.nan, np.nan],           
+        [16, "IAU","2005",1, "Equirectangular, clon=180", "Equirectangular", "False_Easting", 0, "False_Northing", 0, "Central_Meridian", 180, "latitude_Of_Origin", 0, np.nan, np.nan, np.nan, np.nan],           
+        [17, "IAU","2005",2, "Equirectangular, clon=180", "Equirectangular", "False_Easting", 0, "False_Northing", 0, "Central_Meridian", 180, "latitude_Of_Origin", 0, np.nan, np.nan, np.nan, np.nan],           
+        [18, "IAU","2005",3, "Equirectangular, clon=180", "Equirectangular", "False_Easting", 0, "False_Northing", 0, "Central_Meridian", 180, "latitude_Of_Origin", 0, np.nan, np.nan, np.nan, np.nan],           
+        [19, "IAU","2005",4, "Equirectangular, clon=180", "Equirectangular", "False_Easting", 0, "False_Northing", 0, "Central_Meridian", 180, "latitude_Of_Origin", 0, np.nan, np.nan, np.nan, np.nan],                   
+        [20, "IAU","2005",0, "Sinusoidal, clon=0", "Sinusoidal", "False_Easting", 0, "False_Northing", 0, "Longitude_Of_Center", 0, np.nan, np.nan, np.nan, np.nan, np.nan, np.nan],        
+        [21, "IAU","2005",1, "Sinusoidal, clon=0", "Sinusoidal", "False_Easting", 0, "False_Northing", 0, "Longitude_Of_Center", 0, np.nan, np.nan, np.nan, np.nan, np.nan, np.nan],        
+        [22, "IAU","2005",2, "Sinusoidal, clon=0", "Sinusoidal", "False_Easting", 0, "False_Northing", 0, "Longitude_Of_Center", 0, np.nan, np.nan, np.nan, np.nan, np.nan, np.nan],        
+        [23, "IAU","2005",3, "Sinusoidal, clon=0", "Sinusoidal", "False_Easting", 0, "False_Northing", 0, "Longitude_Of_Center", 0, np.nan, np.nan, np.nan, np.nan, np.nan, np.nan],        
+        [24, "IAU","2005",4, "Sinusoidal, clon=0", "Sinusoidal", "False_Easting", 0, "False_Northing", 0, "Longitude_Of_Center", 0, np.nan, np.nan, np.nan, np.nan, np.nan, np.nan],        
+        [25, "IAU","2005",0, "Sinusoidal, clon=180", "Sinusoidal", "False_Easting", 0, "False_Northing", 0, "Longitude_Of_Center", 180, np.nan, np.nan, np.nan, np.nan, np.nan, np.nan],         
+        [26, "IAU","2005",1, "Sinusoidal, clon=180", "Sinusoidal", "False_Easting", 0, "False_Northing", 0, "Longitude_Of_Center", 180, np.nan, np.nan, np.nan, np.nan, np.nan, np.nan],         
+        [27, "IAU","2005",2, "Sinusoidal, clon=180", "Sinusoidal", "False_Easting", 0, "False_Northing", 0, "Longitude_Of_Center", 180, np.nan, np.nan, np.nan, np.nan, np.nan, np.nan],         
+        [28, "IAU","2005",3, "Sinusoidal, clon=180", "Sinusoidal", "False_Easting", 0, "False_Northing", 0, "Longitude_Of_Center", 180, np.nan, np.nan, np.nan, np.nan, np.nan, np.nan],         
+        [29, "IAU","2005",4, "Sinusoidal, clon=180", "Sinusoidal", "False_Easting", 0, "False_Northing", 0, "Longitude_Of_Center", 180, np.nan, np.nan, np.nan, np.nan, np.nan, np.nan],         
+        [30, "IAU","2005",0, "North Polar, clon=0","Stereographic", "False_Easting", 0, "False_Northing", 0, "Central_Meridian", 0, "Scale_Factor", 1, "Latitude_Of_Origin", 90, np.nan, np.nan],                   
+        [31, "IAU","2005",1, "North Polar, clon=0","Stereographic", "False_Easting", 0, "False_Northing", 0, "Central_Meridian", 0, "Scale_Factor", 1, "Latitude_Of_Origin", 90, np.nan, np.nan],                   
+        [32, "IAU","2005",2, "North Polar, clon=0","Stereographic", "False_Easting", 0, "False_Northing", 0, "Central_Meridian", 0, "Scale_Factor", 1, "Latitude_Of_Origin", 90, np.nan, np.nan],                   
+        [33, "IAU","2005",3, "North Polar, clon=0","Stereographic", "False_Easting", 0, "False_Northing", 0, "Central_Meridian", 0, "Scale_Factor", 1, "Latitude_Of_Origin", 90, np.nan, np.nan],                   
+        [34, "IAU","2005",4, "North Polar, clon=0","Stereographic", "False_Easting", 0, "False_Northing", 0, "Central_Meridian", 0, "Scale_Factor", 1, "Latitude_Of_Origin", 90, np.nan, np.nan],                           
+        [35, "IAU","2005",0, "South Polar, clon=0","Stereographic", "False_Easting", 0, "False_Northing", 0, "Central_Meridian", 0, "Scale_Factor", 1, "Latitude_Of_Origin", -90, np.nan, np.nan],               
+        [36, "IAU","2005",1, "South Polar, clon=0","Stereographic", "False_Easting", 0, "False_Northing", 0, "Central_Meridian", 0, "Scale_Factor", 1, "Latitude_Of_Origin", -90, np.nan, np.nan],               
+        [37, "IAU","2005",2, "South Polar, clon=0","Stereographic", "False_Easting", 0, "False_Northing", 0, "Central_Meridian", 0, "Scale_Factor", 1, "Latitude_Of_Origin", -90, np.nan, np.nan],               
+        [38, "IAU","2005",3, "South Polar, clon=0","Stereographic", "False_Easting", 0, "False_Northing", 0, "Central_Meridian", 0, "Scale_Factor", 1, "Latitude_Of_Origin", -90, np.nan, np.nan],               
+        [39, "IAU","2005",4, "South Polar, clon=0","Stereographic", "False_Easting", 0, "False_Northing", 0, "Central_Meridian", 0, "Scale_Factor", 1, "Latitude_Of_Origin", -90, np.nan, np.nan],               
+        [40, "IAU","2005",0, "Mollweide, clon=0", "Mollweide", "False_Easting", 0, "False_Northing", 0, "Central_Meridian", 0, np.nan, np.nan, np.nan, np.nan, np.nan, np.nan],         
+        [41, "IAU","2005",1, "Mollweide, clon=0", "Mollweide", "False_Easting", 0, "False_Northing", 0, "Central_Meridian", 0, np.nan, np.nan, np.nan, np.nan, np.nan, np.nan],         
+        [42, "IAU","2005",2, "Mollweide, clon=0", "Mollweide", "False_Easting", 0, "False_Northing", 0, "Central_Meridian", 0, np.nan, np.nan, np.nan, np.nan, np.nan, np.nan],         
+        [43, "IAU","2005",3, "Mollweide, clon=0", "Mollweide", "False_Easting", 0, "False_Northing", 0, "Central_Meridian", 0, np.nan, np.nan, np.nan, np.nan, np.nan, np.nan],         
+        [44, "IAU","2005",4, "Mollweide, clon=0", "Mollweide", "False_Easting", 0, "False_Northing", 0, "Central_Meridian", 0, np.nan, np.nan, np.nan, np.nan, np.nan, np.nan],         
+        [45, "IAU","2005",0, "Mollweide, clon=180", "Mollweide", "False_Easting", 0, "False_Northing", 0, "Central_Meridian", 180, np.nan, np.nan, np.nan, np.nan, np.nan, np.nan],        
+        [46, "IAU","2005",1, "Mollweide, clon=180", "Mollweide", "False_Easting", 0, "False_Northing", 0, "Central_Meridian", 180, np.nan, np.nan, np.nan, np.nan, np.nan, np.nan],        
+        [47, "IAU","2005",2, "Mollweide, clon=180", "Mollweide", "False_Easting", 0, "False_Northing", 0, "Central_Meridian", 180, np.nan, np.nan, np.nan, np.nan, np.nan, np.nan],        
+        [48, "IAU","2005",3, "Mollweide, clon=180", "Mollweide", "False_Easting", 0, "False_Northing", 0, "Central_Meridian", 180, np.nan, np.nan, np.nan, np.nan, np.nan, np.nan],        
+        [49, "IAU","2005",4, "Mollweide, clon=180", "Mollweide", "False_Easting", 0, "False_Northing", 0, "Central_Meridian", 180, np.nan, np.nan, np.nan, np.nan, np.nan, np.nan],        
+        [50, "IAU","2005",0, "Robinson, clon=0", "Robinson", "False_Easting", 0, "False_Northing", 0, "Longitude_Of_Center", 0, np.nan, np.nan, np.nan, np.nan, np.nan, np.nan],          
+        [51, "IAU","2005",1, "Robinson, clon=0", "Robinson", "False_Easting", 0, "False_Northing", 0, "Longitude_Of_Center", 0, np.nan, np.nan, np.nan, np.nan, np.nan, np.nan],          
+        [52, "IAU","2005",2, "Robinson, clon=0", "Robinson", "False_Easting", 0, "False_Northing", 0, "Longitude_Of_Center", 0, np.nan, np.nan, np.nan, np.nan, np.nan, np.nan],          
+        [53, "IAU","2005",3, "Robinson, clon=0", "Robinson", "False_Easting", 0, "False_Northing", 0, "Longitude_Of_Center", 0, np.nan, np.nan, np.nan, np.nan, np.nan, np.nan],          
+        [54, "IAU","2005",4, "Robinson, clon=0", "Robinson", "False_Easting", 0, "False_Northing", 0, "Longitude_Of_Center", 0, np.nan, np.nan, np.nan, np.nan, np.nan, np.nan],          
+        [55, "IAU","2005",0, "Robinson, clon=180", "Robinson", "False_Easting", 0, "False_Northing", 0, "Longitude_Of_Center", 180, np.nan, np.nan, np.nan, np.nan, np.nan, np.nan],
+        [56, "IAU","2005",1, "Robinson, clon=180", "Robinson", "False_Easting", 0, "False_Northing", 0, "Longitude_Of_Center", 180, np.nan, np.nan, np.nan, np.nan, np.nan, np.nan],
+        [57, "IAU","2005",2, "Robinson, clon=180", "Robinson", "False_Easting", 0, "False_Northing", 0, "Longitude_Of_Center", 180, np.nan, np.nan, np.nan, np.nan, np.nan, np.nan],
+        [58, "IAU","2005",3, "Robinson, clon=180", "Robinson", "False_Easting", 0, "False_Northing", 0, "Longitude_Of_Center", 180, np.nan, np.nan, np.nan, np.nan, np.nan, np.nan],
+        [59, "IAU","2005",4, "Robinson, clon=180", "Robinson", "False_Easting", 0, "False_Northing", 0, "Longitude_Of_Center", 180, np.nan, np.nan, np.nan, np.nan, np.nan, np.nan]
         ]
 
-        columns = ['authority', 'version', 'code', 'name', 'method', 'parameter1Name', 'parameter1Value', 'parameter2Name', 'parameter2Value', 'parameter3Name', 'parameter3Value', 'parameter4Name', 'parameter4Value', 'parameter5Name', 'parameter5Value', 'parameter6Name', 'parameter6Value']
+        columns = ['proj_id','authority', 'version', 'id', 'name', 'method', 'parameter1Name', 'parameter1Value', 'parameter2Name', 'parameter2Value', 'parameter3Name', 'parameter3Value', 'parameter4Name', 'parameter4Value', 'parameter5Name', 'parameter5Value', 'parameter6Name', 'parameter6Value']
         df = pd.DataFrame(data, columns = columns)
-        df_proj = pd.DataFrame(columns = columns)
-        for index, row in planetodetic.iterrows():
-            id = row['authority'] + ":" + str(row['version']) + ":" + str(row['code'])        
-            copy_df = df.copy()
-            copy_df['name'] = row['name'] + ' / ' + copy_df['name'] 
-            copy_df['baseCRS'] = id
-            copy_df['code'] = copy_df['code'] + row['code']
-            df_proj = pd.concat([df_proj, copy_df], sort=True)
-        df_proj = df_proj[['authority','version','code','name','baseCRS','method', 'parameter1Name', 'parameter1Value', 'parameter2Name', 'parameter2Value', 'parameter3Name', 'parameter3Value', 'parameter4Name', 'parameter4Value', 'parameter5Name', 'parameter5Value', 'parameter6Name', 'parameter6Value']]
-        df_proj.sort_values(by='code')    
-        return df_proj
+        planetodetic['baseCRS'] = planetodetic['authority'].apply(str) + ':' + planetodetic['version'].apply(str) + ":" + planetodetic['code'].apply(str)
+        projection_df = pd.merge(planetodetic[['id','baseCRS', 'code']], df, on='id')    
+        projection_df['code'] += projection_df['proj_id']
+        projection_df.sort_values(by='code')  
+        projection_df = projection_df.astype({'code': int})  
+        return projection_df      
 
     def process(self):              
         df = self._df.copy()          
         df = self.__skipRecords(df)
         df = self.__processLongitudePositive(df)
         df = self.__processZeroLongitude(df)
-        self._ellipsoid = self.__ellipsoid(df)
-        self._datum = self.__datum(df, self._ellipsoid)
-        self._planetodetic = self.__planetodetic(df, self._datum)
-        self._projection = self.__projection(self._planetodetic)  
+
+        result = self.__ellipsoid(df)
+        self._ellipsoid = result[['authority','version','code','name','semiMajorAxis','semiMedianAxis','semiMinorAxis','inverseFlatenning']]
+
+        result = self.__datum(df, result)
+        self._datum = result[['authority','version','code','name','body','ellipsoid','primeMeridianName','primeMeridianValue']]
+        
+        result = self.__planetodetic(df, result)
+        self._planetodetic = result[['authority','version','code','name','datum','csType','longitudeDirection']]
+
+        result = self.__projection(result)  
+        self._projection = result[['authority','version','code','name','baseCRS', 'method', 'parameter1Name', 'parameter1Value', 'parameter2Name', 'parameter2Value', 'parameter3Name', 'parameter3Value', 'parameter4Name', 'parameter4Value', 'parameter5Name', 'parameter5Value', 'parameter6Name', 'parameter6Value']]
+
 
     def save(self):       
         self._ellipsoid.to_csv(r'ellipsoid.csv', index = False)
