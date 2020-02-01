@@ -79,7 +79,7 @@ class WKTcrs:
 
         Special cases:
         -------------
-        1/ sphere cannot be computed for triaxial case when IAU2015_Mean = -1
+        1/ Use R_m = (a+b+c)/3 as mean radius when mean radius is not defined (=-1)
         """ 
         # load the selected columns and rename them to match the required columns   
         ellipsoid = df[['Naif_id', 'Body','IAU2015_Semimajor','IAU2015_Axisb','IAU2015_Semiminor', 'IAU2015_Mean']]
@@ -108,6 +108,14 @@ class WKTcrs:
         ellipsoid.loc[2::3,'code'] =  ellipsoid.loc[2::3,'code'] * 100 + 2
         ellipsoid.loc[2::3,'name'] = ellipsoid.loc[2::3, 'name'].str[:] + ' (' + ellipsoid.loc[2::3, 'version'].apply(str) + ')'  
 
+        # Exceptions to the general cases         
+           # case1 => Use R_m = (a+b+c)/3 as mean radius when mean radius is not defined 
+        elipseBodyToRemove = ellipsoid.query("IAU2015_Mean == -1 and (type != 'TRIAXIAL' and type != 'SPHERE')")
+        ellipsoid = ellipsoid.drop(elipseBodyToRemove.index) 
+        medianSphereToSet = ellipsoid.query("IAU2015_Mean == -1 and type == 'SPHERE'")
+        ellipsoid.loc[medianSphereToSet.index, 'IAU2015_Mean'] = (ellipsoid.loc[medianSphereToSet.index, 'semiMajorAxis'] \
+            + ellipsoid.loc[medianSphereToSet.index, 'semiMinorAxis'] + ellipsoid.loc[medianSphereToSet.index, 'semiMedianAxis']) / 3
+
         # Spherical case
             # set mean radius for triaxial bodies
         triaxialBodies = ellipsoid.query("semiMajorAxis != semiMedianAxis and semiMinorAxis != semiMedianAxis and type == 'SPHERE'")            
@@ -134,10 +142,6 @@ class WKTcrs:
         noTriaxialBodies_index = pd.Index(list(set(triaxial.index.tolist()).difference(set(triaxialBodies.index.tolist()))))         
         ellipsoid = ellipsoid.drop(noTriaxialBodies_index) 
 
-        # Exceptions to the general cases         
-           # case1 => cannot convert for interoperability
-        triaxialBodyNotConvertToSphere = ellipsoid.query("IAU2015_Mean == -1 and type != 'TRIAXIAL'")
-        ellipsoid = ellipsoid.drop(triaxialBodyNotConvertToSphere.index) 
 
         # sort by code
         ellipsoid = ellipsoid.sort_values(by='code')

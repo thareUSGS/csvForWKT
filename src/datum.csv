@@ -155,6 +155,7 @@ IAU,2015,99900,Pluto (2015) - Sphere,Pluto,IAU:2015:99900,Mean sub-Charon meridi
 IAU,2015,99901,Pluto (2015),Pluto,IAU:2015:99901,Mean sub-Charon meridian,0.0
 IAU,2015,100001200,Churyumov-Gerasimenko (2015) - Sphere,Churyumov-Gerasimenko,IAU:2015:100001200,a large boulder called Cheops,0.0
 IAU,2015,100001202,Churyumov-Gerasimenko (2015),Churyumov-Gerasimenko,IAU:2015:100001202,a large boulder called Cheops,0.0
+IAU,2015,100003600,Halley (2015) - Sphere,Halley,IAU:2015:100003600,Reference_Meridian,0.0
 IAU,2015,100004100,Hartley 2 (2015) - Sphere,Hartley 2,IAU:2015:100004100,Reference_Meridian,0.0
 IAU,2015,100004101,Hartley 2 (2015),Hartley 2,IAU:2015:100004101,Reference_Meridian,0.0
 IAU,2015,100010700,Wild 2 (2015) - Sphere,Wild 2,IAU:2015:100010700,Reference_Meridian,0.0
@@ -169,6 +170,7 @@ IAU,2015,200002100,Lutetia (2015) - Sphere,Lutetia,IAU:2015:200002100,Reference_
 IAU,2015,200002102,Lutetia (2015),Lutetia,IAU:2015:200002102,Reference_Meridian,0.0
 IAU,2015,200005200,52 Europa (2015) - Sphere,52 Europa,IAU:2015:200005200,long axis that pointed toward the Earth on 2007 May28 8.3125 UT (light-time corrected),0.0
 IAU,2015,200005202,52 Europa (2015),52 Europa,IAU:2015:200005202,long axis that pointed toward the Earth on 2007 May28 8.3125 UT (light-time corrected),0.0
+IAU,2015,200021600,Kleopatra (2015) - Sphere,Kleopatra,IAU:2015:200021600,Reference_Meridian,0.0
 IAU,2015,200021602,Kleopatra (2015),Kleopatra,IAU:2015:200021602,Reference_Meridian,0.0
 IAU,2015,200025300,Mathilde (2015) - Sphere,Mathilde,IAU:2015:200025300,Reference_Meridian,0.0
 IAU,2015,200025302,Mathilde (2015),Mathilde,IAU:2015:200025302,Reference_Meridian,0.0
@@ -178,7 +180,9 @@ IAU,2015,200051100,Davida (2015) - Sphere,Davida,IAU:2015:200051100,the long axi
 IAU,2015,200051102,Davida (2015),Davida,IAU:2015:200051102,the long axis that points toward the Earth on 2002 December27 7.83 UT,0.0
 IAU,2015,200286700,Steins (2015) - Sphere,Steins,IAU:2015:200286700,Spinel,0.0
 IAU,2015,200286702,Steins (2015),Steins,IAU:2015:200286702,Spinel,0.0
+IAU,2015,200417900,Toutatis (2015) - Sphere,Toutatis,IAU:2015:200417900,Reference_Meridian,0.0
 IAU,2015,200417902,Toutatis (2015),Toutatis,IAU:2015:200417902,Reference_Meridian,0.0
+IAU,2015,202514300,Itokawa (2015) - Sphere,Itokawa,IAU:2015:202514300,deﬁned with W0=0,0.0
 IAU,2015,202514302,Itokawa (2015),Itokawa,IAU:2015:202514302,deﬁned with W0=0,0.0
 IAU,2015,243101000,Ida (2015) - Sphere,Ida,IAU:2015:243101000,Afon,0.0
 IAU,2015,243101002,Ida (2015),Ida,IAU:2015:243101002,Afon,0.0

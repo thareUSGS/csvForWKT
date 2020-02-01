@@ -213,6 +213,7 @@ IAU,2015,99902,Pluto (2015) / Ocentric,IAU:2015:99901,spherical,east
 IAU,2015,100001200,Churyumov-Gerasimenko (2015) - Sphere / Ocentric,IAU:2015:100001200,spherical,east
 IAU,2015,100001203,Churyumov-Gerasimenko (2015) / Ographic,IAU:2015:100001202,ellipsoidal,west
 IAU,2015,100001204,Churyumov-Gerasimenko (2015) / Ocentric,IAU:2015:100001202,spherical,east
+IAU,2015,100003600,Halley (2015) - Sphere / Ocentric,IAU:2015:100003600,spherical,east
 IAU,2015,100004100,Hartley 2 (2015) - Sphere / Ocentric,IAU:2015:100004100,spherical,east
 IAU,2015,100004102,Hartley 2 (2015) / Ocentric,IAU:2015:100004101,spherical,east
 IAU,2015,100010700,Wild 2 (2015) - Sphere / Ocentric,IAU:2015:100010700,spherical,east
@@ -231,6 +232,7 @@ IAU,2015,200002104,Lutetia (2015) / Ocentric,IAU:2015:200002102,spherical,east
 IAU,2015,200005200,52 Europa (2015) - Sphere / Ocentric,IAU:2015:200005200,spherical,east
 IAU,2015,200005203,52 Europa (2015) / Ographic,IAU:2015:200005202,ellipsoidal,west
 IAU,2015,200005204,52 Europa (2015) / Ocentric,IAU:2015:200005202,spherical,east
+IAU,2015,200021600,Kleopatra (2015) - Sphere / Ocentric,IAU:2015:200021600,spherical,east
 IAU,2015,200021604,Kleopatra (2015) / Ocentric,IAU:2015:200021602,spherical,east
 IAU,2015,200025300,Mathilde (2015) - Sphere / Ocentric,IAU:2015:200025300,spherical,east
 IAU,2015,200025304,Mathilde (2015) / Ocentric,IAU:2015:200025302,spherical,east
@@ -243,7 +245,9 @@ IAU,2015,200051104,Davida (2015) / Ocentric,IAU:2015:200051102,spherical,east
 IAU,2015,200286700,Steins (2015) - Sphere / Ocentric,IAU:2015:200286700,spherical,east
 IAU,2015,200286703,Steins (2015) / Ographic,IAU:2015:200286702,ellipsoidal,west
 IAU,2015,200286704,Steins (2015) / Ocentric,IAU:2015:200286702,spherical,east
+IAU,2015,200417900,Toutatis (2015) - Sphere / Ocentric,IAU:2015:200417900,spherical,east
 IAU,2015,200417904,Toutatis (2015) / Ocentric,IAU:2015:200417902,spherical,east
+IAU,2015,202514300,Itokawa (2015) - Sphere / Ocentric,IAU:2015:202514300,spherical,east
 IAU,2015,202514303,Itokawa (2015) / Ographic,IAU:2015:202514302,ellipsoidal,west
 IAU,2015,202514304,Itokawa (2015) / Ocentric,IAU:2015:202514302,spherical,east
 IAU,2015,243101000,Ida (2015) - Sphere / Ocentric,IAU:2015:243101000,spherical,east
