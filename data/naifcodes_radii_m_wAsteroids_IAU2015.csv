@@ -159,7 +159,7 @@ Naif_id,Body,IAU2015_Mean,IAU2015_Semimajor,IAU2015_Axisb,IAU2015_Semiminor,rota
 1000005,Borrelly,4220.00,3500.00,-1,-1,Direct,,
 1000012,Churyumov-Gerasimenko,1650.00,2400.00,1550.00,1200.00,Direct,a large boulder called Cheops,0
 1000036,Halley,-1.00,8000.00,4000.00,4000.00,,,
-1000041,Hartley 2,580.00,340.00,1160.00,1160.00,,An isolated large mount on the waist, near the large lobe,0
+1000041,Hartley 2,580.00,340.00,1160.00,1160.00,An isolated large mount on the waist, near the large lobe,0
 1000093,Tempel 1,3000.00,3700.00,2500.00,-1,Direct,A 350 m diameter unnamed circular feature near the Deep Impactor impact site,0
 1000107,Wild 2,1975.00,2700.00,1900.00,1500.00,,,
 9511010,Gaspra,6100.00,9100.00,5200.00,4400.00,Direct,Charax,0
