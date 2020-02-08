@@ -9,8 +9,9 @@ class TriaxialBody(IWKT):
     def __init__(self, data):
         template = """GEODCRS["$name",
     DATUM["$datum_name",
-        TRIAXIAL["$ellipsoide_name", $semi_major, $semi_median, $semi_minor, LENGTHUNIT["metre", 1, ID["EPSG", 9001]]]],
-        PRIMEM["$primeMeridianName", $primeMeridianValue, ANGLEUNIT["degree", 0.017453292519943295, ID["EPSG", 9102]]],
+        TRIAXIAL["$ellipsoide_name", $semi_major, $semi_median, $semi_minor, LENGTHUNIT["metre", 1, ID["EPSG", 9001]]]
+    ],
+    PRIMEM["$primeMeridianName", $primeMeridianValue, ANGLEUNIT["degree", 0.017453292519943295, ID["EPSG", 9102]]],
     $cs,
     ID["$authority", $code, $version], REMARK["$remark"]]
     """    
@@ -80,18 +81,22 @@ class OgraphicTriaxial(TriaxialBody):
 
 class ProjectionTriaxial(TriaxialBody):
 
-    def __init__(self, data):
+    def __init__(self, data, keywordOdetic):
 
         TriaxialBody.__init__(self, data)
+        self._keywordOdetic = keywordOdetic
         template = """
 PROJCRS["$name",
-BASEGEODCRS["$name_planetodetic",
+$keywordOdetic["$name_planetodetic",
     DATUM["$datum_name",
-    TRIAXIAL["$ellipsoide_name", $semi_major, $semi_median, $semi_minor, LENGTHUNIT["metre", 1, ID["EPSG", 9001]]]],
-    PRIMEM["$primeMeridianName", $primeMeridianValue, ANGLEUNIT["degree", 0.017453292519943295, ID["EPSG", 9102]]]],
+        TRIAXIAL["$ellipsoide_name", $semi_major, $semi_median, $semi_minor, LENGTHUNIT["metre", 1, ID["EPSG", 9001]]]
+    ],
+    PRIMEM["$primeMeridianName", $primeMeridianValue, ANGLEUNIT["degree", 0.017453292519943295, ID["EPSG", 9102]]]
+],
 CONVERSION["$name",
-    METHOD["$method"],
+    METHOD["$method"$method_id],
     $params
+],
 $cs,
 ID["$authority", $code, $version]]            
             """
@@ -103,8 +108,9 @@ ID["$authority", $code, $version]]
     AXIS["Northing (N)", north, ORDER[2]],
     LENGTHUNIT["metre", 1, ID[\"EPSG\", 9001]]"""
 
-        self._parameter = """PARAMETER["$param_key", $param_val, $param_unit, ID["$param_code", $param_code_value]],"""
+        self._parameter = """PARAMETER["$param_key", $param_val, $param_unit, ID["$param_code", $param_code_value]]"""
 
+        self._methodID = """,ID["$method_autority",$method_code]"""
 
         # build from http://www.epsg-registry.org/ and from http://geotiff.maptools.org/proj_list / http://docs.opengeospatial.org/is/19-008r4/19-008r4.html
         self._authorityMapping = {
@@ -126,24 +132,53 @@ ID["$authority", $code, $version]]
 
     def _computeWKT(self, data) :
         assert data['longitudeDirection']=='east'
+
         csTemp = Template(self._cs)
         cs = csTemp.substitute(longitudeDirection=data['longitudeDirection'])
+        params = self._computeParameters(data) 
+        methodID = self._computeMethodID(data)       
+        wkt = self._s.substitute(            
+            name_planetodetic=data['name'], keywordOdetic=self._keywordOdetic, datum_name=data['datum_name'], ellipsoide_name=data['ellipsoid_name'], 
+            semi_major=data['semiMajorAxis'], semi_median=data['semiMedianAxis'], semi_minor=data['semiMinorAxis'], 
+            primeMeridianName=data['primeMeridianName'], primeMeridianValue=data['primeMeridianValue'],cs=cs, name=data['name'], method=data['method'], method_id=methodID, params=",".join(params), 
+            authority=data['authority'], code=data['code'], version=data['version']
+        )
+        return wkt
+
+    def _computeParameters(self, data):
         paramTemp = Template(self._parameter)
         paramsList = [('parameter1Name', 'parameter1Value'), ('parameter2Name', 'parameter2Value'), ('parameter3Name', 'parameter3Value'), ('parameter4Name', 'parameter4Value'), ('parameter5Name', 'parameter5Value'), ('parameter6Name', 'parameter6Value')]
-        params=""
+        params=[]
         for name, value in paramsList:
             if math.isnan(data[value]):
                 pass
             else:
                 idAndUnit = self._authorityMapping[data[name]]
-                params += paramTemp.substitute(param_key=data[name], param_val=data[value], param_unit=idAndUnit[2], param_code=idAndUnit[0], param_code_value=idAndUnit[1])
-        wkt = self._s.substitute(            
-            name_planetodetic=data['name'], datum_name=data['datum_name'], ellipsoide_name=data['ellipsoid_name'], 
-            semi_major=data['semiMajorAxis'], semi_median=data['semiMedianAxis'], semi_minor=data['semiMinorAxis'], 
-            primeMeridianName=data['primeMeridianName'], primeMeridianValue=data['primeMeridianValue'],cs=cs, name=data['name'], method=data['method'], params=params, 
-            authority=data['authority'], code=data['code'], version=data['version']
-        )
-        return wkt
+                params.append(paramTemp.substitute(param_key=data[name], param_val=data[value], param_unit=idAndUnit[2], param_code=idAndUnit[0], param_code_value=idAndUnit[1]))
+        return params
+
+    def _computeMethodID(self, data):
+        idTemp = Template(self._methodID)
+        if data['method'] in self._authorityMapping:
+            methodValue = self._authorityMapping[data['method']]
+            authority = methodValue[0]
+            code = methodValue[1]
+            result = idTemp.substitute(
+                method_autority=authority,method_code=code
+            )
+        else:
+            result = ""
+        return result        
 
     def getWkt(self):
-        return self._wkt         
+        return self._wkt 
+
+class ProjectionOcentricTriaxial(ProjectionTriaxial):
+
+    def __init__(self, data):
+          ProjectionTriaxial.__init__(self, data, "BASEGEODCRS")
+
+class ProjectionOgraphicTriaxial(ProjectionTriaxial):
+
+    def __init__(self, data):
+          ProjectionTriaxial.__init__(self, data, "BASEGEOGCRS")                
