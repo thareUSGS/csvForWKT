@@ -1,7 +1,7 @@
 #/usr/bin/env python3
 from abc import ABCMeta, abstractmethod
-from biaxialBodyWKT import PlanetOcentricEllipsoid, PlanetOgraphicEllipsoid, ProjectionOcentricEllipsoid, ProjectionOgraphicEllipsoid
-from triaxialBodyWKT import OcentricTriaxial, OgraphicTriaxial, ProjectionOcentricTriaxial, ProjectionOgraphicTriaxial
+from biaxialBodyWKT import PlanetOcentricEllipsoid, PlanetOgraphicEllipsoid, ProjectedOcentricEllipsoid, ProjectedOgraphicEllipsoid
+from triaxialBodyWKT import OcentricTriaxial, OgraphicTriaxial, ProjectedOcentricTriaxial, ProjectedOgraphicTriaxial
 
 #https://stackoverflow.com/questions/8212053/private-constructor-in-python
 #https://www.edureka.co/community/16286/create-a-constant-in-python
@@ -41,11 +41,11 @@ class TemplateWKTFactory(object):
     def createProjectedEllipsoidCrs(data, idWKT):
         assert 'baseCRS' in data
         if idWKT == 0: 
-            instance = ProjectionOcentricEllipsoid(data)
+            instance = ProjectedOcentricEllipsoid(data)
         elif idWKT == 1:
-            instance = ProjectionOgraphicEllipsoid(data)
+            instance = ProjectedOgraphicEllipsoid(data)
         elif idWKT == 2:
-            instance = ProjectionOcentricEllipsoid(data)
+            instance = ProjectedOcentricEllipsoid(data)
         else:
             raise "This datum is not ellipsoidal"
         return instance
@@ -54,9 +54,9 @@ class TemplateWKTFactory(object):
     def createProjectedTriaxialCrs(data, idWKT):
         assert 'baseCRS' in data and data['type'] == 'TRIAXIAL', "this CRS is not triaxial but %s" %data['type']
         if idWKT == 3: 
-            instance = ProjectionOgraphicTriaxial(data)
+            instance = ProjectedOgraphicTriaxial(data)
         elif idWKT == 4:
-            instance = ProjectionOcentricTriaxial(data)
+            instance = ProjectedOcentricTriaxial(data)
         else:
             raise "This datum is not triaxial" 
         return instance       

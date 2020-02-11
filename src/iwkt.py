@@ -9,7 +9,7 @@ class IWKT:
     def version(self): return "2.0"
 
     @abstractmethod
-    def getWkt(self): raise NotImplementedError
+    def getWKT(self): raise NotImplementedError
 
     @abstractmethod
-    def _computeWkt(self, data): raise NotImplementedError
+    def computeWKT(self): raise NotImplementedError

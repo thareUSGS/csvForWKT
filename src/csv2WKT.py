@@ -5,6 +5,7 @@ import numpy as np
 import pandas as pd
 
 from bodyWKT import TemplateWKTFactory
+from iprojectedwkt import IProjectedCRS
 
 
 class Crs2WKT:
@@ -83,7 +84,8 @@ class Crs2WKT:
         wkts = wkts.sort_values(by = 'code') 
         for index, wkt in  wkts.iterrows():
             try:
-                print(wkt['wkt'].getWkt())
+                wkt['wkt'].computeWKT()
+                print(wkt['wkt'].getWKT())
             except Exception as err:
                 print(err)
                 print(wkt['code'])
@@ -410,58 +412,7 @@ class Crs2WKT:
         * parameterName
         * parameterValue
         """
-        data = [        
-        [10, "IAU", "2005", 0, "Equirectangular, clon = 0", "Equidistant Cylindrical (Spherical)", "False easting", 0, "False northing", 0, "Longitude of natural origin", 0, "Latitude of 1st standard parallel", 0, np.nan, np.nan, np.nan, np.nan],        
-        [11, "IAU", "2005", 1, "Equirectangular, clon = 0", "Equidistant Cylindrical", "False easting", 0, "False northing", 0, "Longitude of natural origin", 0, "Latitude of 1st standard parallel", 0, np.nan, np.nan, np.nan, np.nan],        
-        [12, "IAU", "2005", 2, "Equirectangular, clon = 0", "Equidistant Cylindrical", "False easting", 0, "False northing", 0, "Longitude of natural origin", 0, "Latitude of 1st standard parallel", 0, np.nan, np.nan, np.nan, np.nan],        
-        [13, "IAU", "2005", 3, "Equirectangular, clon = 0", "Equidistant Cylindrical", "False easting", 0, "False northing", 0, "Longitude of natural origin", 0, "Latitude of 1st standard parallel", 0, np.nan, np.nan, np.nan, np.nan],        
-        [14, "IAU", "2005", 4, "Equirectangular, clon = 0", "Equidistant Cylindrical", "False easting", 0, "False northing", 0, "Longitude of natural origin", 0, "Latitude of 1st standard parallel", 0, np.nan, np.nan, np.nan, np.nan],        
-        [15, "IAU", "2005", 0, "Equirectangular, clon = 180", "Equidistant Cylindrical", "False easting", 0, "False northing", 0, "Longitude of natural origin", 180, "Latitude of 1st standard parallel", 0, np.nan, np.nan, np.nan, np.nan],           
-        [16, "IAU", "2005", 1, "Equirectangular, clon = 180", "Equidistant Cylindrical", "False easting", 0, "False northing", 0, "Longitude of natural origin", 180, "Latitude of 1st standard parallel", 0, np.nan, np.nan, np.nan, np.nan],           
-        [17, "IAU", "2005", 2, "Equirectangular, clon = 180", "Equidistant Cylindrical", "False easting", 0, "False northing", 0, "Longitude of natural origin", 180, "Latitude of 1st standard parallel", 0, np.nan, np.nan, np.nan, np.nan],           
-        [18, "IAU", "2005", 3, "Equirectangular, clon = 180", "Equidistant Cylindrical", "False easting", 0, "False northing", 0, "Longitude of natural origin", 180, "Latitude of 1st standard parallel", 0, np.nan, np.nan, np.nan, np.nan],           
-        [19, "IAU", "2005", 4, "Equirectangular, clon = 180", "Equidistant Cylindrical", "False easting", 0, "False northing", 0, "Longitude of natural origin", 180, "Latitude of 1st standard parallel", 0, np.nan, np.nan, np.nan, np.nan],                   
-        [20, "IAU", "2005", 0, "Sinusoidal, clon = 0", "Sinusoidal", "False easting", 0, "False northing", 0, "Longitude of false origin", 0, np.nan, np.nan, np.nan, np.nan, np.nan, np.nan],        
-        [21, "IAU", "2005", 1, "Sinusoidal, clon = 0", "Sinusoidal", "False easting", 0, "False northing", 0, "Longitude of false origin", 0, np.nan, np.nan, np.nan, np.nan, np.nan, np.nan],        
-        [22, "IAU", "2005", 2, "Sinusoidal, clon = 0", "Sinusoidal", "False easting", 0, "False northing", 0, "Longitude of false origin", 0, np.nan, np.nan, np.nan, np.nan, np.nan, np.nan],        
-        [23, "IAU", "2005", 3, "Sinusoidal, clon = 0", "Sinusoidal", "False easting", 0, "False northing", 0, "Longitude of false origin", 0, np.nan, np.nan, np.nan, np.nan, np.nan, np.nan],        
-        [24, "IAU", "2005", 4, "Sinusoidal, clon = 0", "Sinusoidal", "False easting", 0, "False northing", 0, "Longitude of false origin", 0, np.nan, np.nan, np.nan, np.nan, np.nan, np.nan],        
-        [25, "IAU", "2005", 0, "Sinusoidal, clon = 180", "Sinusoidal", "False easting", 0, "False northing", 0, "Longitude of false origin", 180, np.nan, np.nan, np.nan, np.nan, np.nan, np.nan],         
-        [26, "IAU", "2005", 1, "Sinusoidal, clon = 180", "Sinusoidal", "False easting", 0, "False northing", 0, "Longitude of false origin", 180, np.nan, np.nan, np.nan, np.nan, np.nan, np.nan],         
-        [27, "IAU", "2005", 2, "Sinusoidal, clon = 180", "Sinusoidal", "False easting", 0, "False northing", 0, "Longitude of false origin", 180, np.nan, np.nan, np.nan, np.nan, np.nan, np.nan],         
-        [28, "IAU", "2005", 3, "Sinusoidal, clon = 180", "Sinusoidal", "False easting", 0, "False northing", 0, "Longitude of false origin", 180, np.nan, np.nan, np.nan, np.nan, np.nan, np.nan],         
-        [29, "IAU", "2005", 4, "Sinusoidal, clon = 180", "Sinusoidal", "False easting", 0, "False northing", 0, "Longitude of false origin", 180, np.nan, np.nan, np.nan, np.nan, np.nan, np.nan],         
-        [30, "IAU", "2005", 0, "North Polar, clon = 0", "Stereographic", "False easting", 0, "False northing", 0, "Longitude of natural origin", 0, "Scale factor at natural origin", 1, "Latitude of natural origin", 90, np.nan, np.nan],                   
-        [31, "IAU", "2005", 1, "North Polar, clon = 0", "Stereographic", "False easting", 0, "False northing", 0, "Longitude of natural origin", 0, "Scale factor at natural origin", 1, "Latitude of natural origin", 90, np.nan, np.nan],                   
-        [32, "IAU", "2005", 2, "North Polar, clon = 0", "Stereographic", "False easting", 0, "False northing", 0, "Longitude of natural origin", 0, "Scale factor at natural origin", 1, "Latitude of natural origin", 90, np.nan, np.nan],                   
-        [33, "IAU", "2005", 3, "North Polar, clon = 0", "Stereographic", "False easting", 0, "False northing", 0, "Longitude of natural origin", 0, "Scale factor at natural origin", 1, "Latitude of natural origin", 90, np.nan, np.nan],                   
-        [34, "IAU", "2005", 4, "North Polar, clon = 0", "Stereographic", "False easting", 0, "False northing", 0, "Longitude of natural origin", 0, "Scale factor at natural origin", 1, "Latitude of natural origin", 90, np.nan, np.nan],                           
-        [35, "IAU", "2005", 0, "South Polar, clon = 0", "Stereographic", "False easting", 0, "False northing", 0, "Longitude of natural origin", 0, "Scale factor at natural origin", 1, "Latitude of natural origin", -90, np.nan, np.nan],               
-        [36, "IAU", "2005", 1, "South Polar, clon = 0", "Stereographic", "False easting", 0, "False northing", 0, "Longitude of natural origin", 0, "Scale factor at natural origin", 1, "Latitude of natural origin", -90, np.nan, np.nan],               
-        [37, "IAU", "2005", 2, "South Polar, clon = 0", "Stereographic", "False easting", 0, "False northing", 0, "Longitude of natural origin", 0, "Scale factor at natural origin", 1, "Latitude of natural origin", -90, np.nan, np.nan],               
-        [38, "IAU", "2005", 3, "South Polar, clon = 0", "Stereographic", "False easting", 0, "False northing", 0, "Longitude of natural origin", 0, "Scale factor at natural origin", 1, "Latitude of natural origin", -90, np.nan, np.nan],               
-        [39, "IAU", "2005", 4, "South Polar, clon = 0", "Stereographic", "False easting", 0, "False northing", 0, "Longitude of natural origin", 0, "Scale factor at natural origin", 1, "Latitude of natural origin", -90, np.nan, np.nan],               
-        [40, "IAU", "2005", 0, "Mollweide, clon = 0", "Mollweide", "False easting", 0, "False northing", 0, "Longitude of natural origin", 0, np.nan, np.nan, np.nan, np.nan, np.nan, np.nan],         
-        [41, "IAU", "2005", 1, "Mollweide, clon = 0", "Mollweide", "False easting", 0, "False northing", 0, "Longitude of natural origin", 0, np.nan, np.nan, np.nan, np.nan, np.nan, np.nan],         
-        [42, "IAU", "2005", 2, "Mollweide, clon = 0", "Mollweide", "False easting", 0, "False northing", 0, "Longitude of natural origin", 0, np.nan, np.nan, np.nan, np.nan, np.nan, np.nan],         
-        [43, "IAU", "2005", 3, "Mollweide, clon = 0", "Mollweide", "False easting", 0, "False northing", 0, "Longitude of natural origin", 0, np.nan, np.nan, np.nan, np.nan, np.nan, np.nan],         
-        [44, "IAU", "2005", 4, "Mollweide, clon = 0", "Mollweide", "False easting", 0, "False northing", 0, "Longitude of natural origin", 0, np.nan, np.nan, np.nan, np.nan, np.nan, np.nan],         
-        [45, "IAU", "2005", 0, "Mollweide, clon = 180", "Mollweide", "False easting", 0, "False northing", 0, "Longitude of natural origin", 180, np.nan, np.nan, np.nan, np.nan, np.nan, np.nan],        
-        [46, "IAU", "2005", 1, "Mollweide, clon = 180", "Mollweide", "False easting", 0, "False northing", 0, "Longitude of natural origin", 180, np.nan, np.nan, np.nan, np.nan, np.nan, np.nan],        
-        [47, "IAU", "2005", 2, "Mollweide, clon = 180", "Mollweide", "False easting", 0, "False northing", 0, "Longitude of natural origin", 180, np.nan, np.nan, np.nan, np.nan, np.nan, np.nan],        
-        [48, "IAU", "2005", 3, "Mollweide, clon = 180", "Mollweide", "False easting", 0, "False northing", 0, "Longitude of natural origin", 180, np.nan, np.nan, np.nan, np.nan, np.nan, np.nan],        
-        [49, "IAU", "2005", 4, "Mollweide, clon = 180", "Mollweide", "False easting", 0, "False northing", 0, "Longitude of natural origin", 180, np.nan, np.nan, np.nan, np.nan, np.nan, np.nan],        
-        [50, "IAU", "2005", 0, "Robinson, clon = 0", "Robinson", "False easting", 0, "False northing", 0, "Longitude of false origin", 0, np.nan, np.nan, np.nan, np.nan, np.nan, np.nan],          
-        [51, "IAU", "2005", 1, "Robinson, clon = 0", "Robinson", "False easting", 0, "False northing", 0, "Longitude of false origin", 0, np.nan, np.nan, np.nan, np.nan, np.nan, np.nan],          
-        [52, "IAU", "2005", 2, "Robinson, clon = 0", "Robinson", "False easting", 0, "False northing", 0, "Longitude of false origin", 0, np.nan, np.nan, np.nan, np.nan, np.nan, np.nan],          
-        [53, "IAU", "2005", 3, "Robinson, clon = 0", "Robinson", "False easting", 0, "False northing", 0, "Longitude of false origin", 0, np.nan, np.nan, np.nan, np.nan, np.nan, np.nan],          
-        [54, "IAU", "2005", 4, "Robinson, clon = 0", "Robinson", "False easting", 0, "False northing", 0, "Longitude of false origin", 0, np.nan, np.nan, np.nan, np.nan, np.nan, np.nan],          
-        [55, "IAU", "2005", 0, "Robinson, clon = 180", "Robinson", "False easting", 0, "False northing", 0, "Longitude of false origin", 180, np.nan, np.nan, np.nan, np.nan, np.nan, np.nan], 
-        [56, "IAU", "2005", 1, "Robinson, clon = 180", "Robinson", "False easting", 0, "False northing", 0, "Longitude of false origin", 180, np.nan, np.nan, np.nan, np.nan, np.nan, np.nan], 
-        [57, "IAU", "2005", 2, "Robinson, clon = 180", "Robinson", "False easting", 0, "False northing", 0, "Longitude of false origin", 180, np.nan, np.nan, np.nan, np.nan, np.nan, np.nan], 
-        [58, "IAU", "2005", 3, "Robinson, clon = 180", "Robinson", "False easting", 0, "False northing", 0, "Longitude of false origin", 180, np.nan, np.nan, np.nan, np.nan, np.nan, np.nan], 
-        [59, "IAU", "2005", 4, "Robinson, clon = 180", "Robinson", "False easting", 0, "False northing", 0, "Longitude of false origin", 180, np.nan, np.nan, np.nan, np.nan, np.nan, np.nan]
-        ]
+        data = IProjectedCRS.getProjectionCode()
 
         planetodeticCopy = planetodetic.copy()
         columns = ['proj_id', 'authority', 'version', 'id', 'name', 'method', 'parameter1Name', 'parameter1Value', 'parameter2Name', 'parameter2Value', 'parameter3Name', 'parameter3Value', 'parameter4Name', 'parameter4Value', 'parameter5Name', 'parameter5Value', 'parameter6Name', 'parameter6Value']
