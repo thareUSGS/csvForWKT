@@ -12,7 +12,7 @@ class Body(ABC):
             TRIAXIAL["$ellipsoide_name", $semi_major, $semi_median, $semi_minor, LENGTHUNIT["metre", 1, ID["EPSG", 9001]]$anchor
         ],
         PRIMEM["Reference Meridian", 0.0, ANGLEUNIT["degree", 0.017453292519943295, ID["EPSG", 9102]]]"""    
-        self._anchor = """,\n            ANCHOR[$primeMeridianName: $primeMeridianValue]"""
+        self._anchor = """,\n            ANCHOR["$primeMeridianName: $primeMeridianValue"]"""
         self._datum_template= Template(datum_template)    
         self._data = data    
 

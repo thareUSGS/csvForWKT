@@ -12,7 +12,7 @@ class Body(ABC):
             ELLIPSOID["$ellipsoide_name", $radius, $inverse_flat, LENGTHUNIT["metre", 1]]$anchor
         ],
         PRIMEM["Reference Meridian", 0.0, ANGLEUNIT["degree", 0.017453292519943295, ID["EPSG", 9102]]]"""    
-        self._anchor = """,\n            ANCHOR[$primeMeridianName: $primeMeridianValue]"""
+        self._anchor = """,\n            ANCHOR["$primeMeridianName: $primeMeridianValue"]"""
         self._datum_template= Template(datum_template)    
         self._data = data    
 
@@ -142,6 +142,7 @@ class ProjectedOcentricEllipsoid(ProjectedBiaxialBody):
         self._methodID = """,ID["$method_autority",$method_code]"""            
           
     def getCs(self):
+        assert self._data['longitudeDirection'] == 'east', "longitude Direction must be east for ocentric CRS, not %s"%self._data['longitudeDirection']
         longAxis = "Easting (E)" if self._data['longitudeDirection'] == 'east' else "Westing (W)"
         return self._cs_template.substitute(longitudeDirection=self._data['longitudeDirection'], longAxis=longAxis)       
                  
