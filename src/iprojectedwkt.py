@@ -1,7 +1,7 @@
 #/usr/bin/env python3
 
 from abc import ABC, abstractmethod, ABCMeta
-from iwkt import IWKT
+from .iwkt import IWKT
 from string import Template
 import math
 import numpy as np

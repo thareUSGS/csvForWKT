@@ -1,7 +1,7 @@
 #/usr/bin/env python3
 from abc import ABCMeta, abstractmethod
-from biaxialBodyWKT import PlanetOcentricEllipsoid, PlanetOgraphicEllipsoid, ProjectedOcentricEllipsoid, ProjectedOgraphicEllipsoid
-from triaxialBodyWKT import OcentricTriaxial, OgraphicTriaxial, ProjectedOcentricTriaxial, ProjectedOgraphicTriaxial
+from .biaxialBodyWKT import PlanetOcentricEllipsoid, PlanetOgraphicEllipsoid, ProjectedOcentricEllipsoid, ProjectedOgraphicEllipsoid
+from .triaxialBodyWKT import OcentricTriaxial, OgraphicTriaxial, ProjectedOcentricTriaxial, ProjectedOgraphicTriaxial
 
 #https://stackoverflow.com/questions/8212053/private-constructor-in-python
 #https://www.edureka.co/community/16286/create-a-constant-in-python

@@ -1,15 +1,15 @@
 #/usr/bin/env python3
 from string import Template
 from abc import ABC, abstractmethod, ABCMeta
-from igeodeticwkt import IGeodeticCRS
-from iprojectedwkt import IProjectedCRS
+from .igeodeticwkt import IGeodeticCRS
+from .iprojectedwkt import IProjectedCRS
 import numpy
 
 class Body(ABC):
     __metaclass__ = ABCMeta
     def __init__(self, data):
         datum_template = """DATUM["$datum_name",
-            TRIAXIAL["$ellipsoide_name", $semi_major, $semi_median, $semi_minor, LENGTHUNIT["metre", 1, ID["EPSG", 9001]]$anchor
+            TRIAXIAL["$ellipsoide_name", $semi_major, $semi_median, $semi_minor, LENGTHUNIT["metre", 1, ID["EPSG", 9001]]]$anchor
         ],
         PRIMEM["Reference Meridian", 0.0, ANGLEUNIT["degree", 0.017453292519943295, ID["EPSG", 9102]]]"""    
         self._anchor = """,\n            ANCHOR["$primeMeridianName: $primeMeridianValue"]"""

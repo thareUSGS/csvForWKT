@@ -4,8 +4,8 @@ import os
 import numpy as np
 import pandas as pd
 
-from bodyWKT import TemplateWKTFactory
-from iprojectedwkt import IProjectedCRS
+from .bodyWKT import TemplateWKTFactory
+from .iprojectedwkt import IProjectedCRS
 
 
 class Crs2WKT:
@@ -66,9 +66,10 @@ class Crs2WKT:
         return dataProjected
     
 
-    def _compute_wkt(self):
+    def _compute_wkts(self):
         """Compute WKTs
         """       
+        self._wkt = {}
         col_names =  ['code', 'wkt']
         wkts  = pd.DataFrame(columns = col_names)
         planetodeticData = self._merge_planetodetic_data()   
@@ -82,14 +83,17 @@ class Crs2WKT:
             wkts = wkts.append({'code': row['code'], 'wkt': wkt}, ignore_index = True) 
 
         wkts = wkts.sort_values(by = 'code') 
+        exception = []
         for index, wkt in  wkts.iterrows():
             try:
                 wkt['wkt'].computeWKT()
-                print(wkt['wkt'].getWKT())
+                self._wkt[wkt['code']] = wkt['wkt'].getWKT()
             except Exception as err:
-                print(err)
-                print(wkt['code'])
-                print (wkt['wkt'])
+                msg = "%s %s %s"%(err, wkt['code'], wkt['wkt'])
+                exception.append(msg)
+
+        if len(exception)>0:
+            raise Exception(msg)
         
 
     def __skip_records(self, df):
@@ -433,7 +437,11 @@ class Crs2WKT:
         self._ellipsoid = self.__ellipsoid(df)
         self._datum = self.__datum(df, self._ellipsoid)        
         self._planetodetic = self.__planetodetic(df, self._datum)
-        self._projection = self.__projection(self._planetodetic)  
+        self._projection = self.__projection(self._planetodetic)   
+        self._compute_wkts()   
+
+    def getWkts(self):
+        return self._wkt    
 
 
     def save(self):       
@@ -449,7 +457,9 @@ class Crs2WKT:
         projection = self._projection[['authority', 'version', 'code', 'name', 'baseCRS', 'method', 'parameter1Name', 'parameter1Value', 'parameter2Name', 'parameter2Value', 'parameter3Name', 'parameter3Value', 'parameter4Name', 'parameter4Value', 'parameter5Name', 'parameter5Value', 'parameter6Name', 'parameter6Value']]
         projection.to_csv(r'projection.csv', index = False)
 
-        self._compute_wkt()
+        wkts = self.getWkt()
+        for code, wkt in dict.items():
+            print(wkt)
 
 if __name__ == "__main__":
     crs = Crs2WKT()

@@ -1,8 +1,8 @@
 #/usr/bin/env python3
 from string import Template
 from abc import ABC, abstractmethod, ABCMeta
-from iprojectedwkt import IProjectedCRS
-from igeodeticwkt import IGeodeticCRS
+from .iprojectedwkt import IProjectedCRS
+from .igeodeticwkt import IGeodeticCRS
 import numpy
 
 class Body(ABC):
