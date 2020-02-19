@@ -27,7 +27,7 @@ class Crs2WKT:
         self._planetodetic = None
         self._projection = None
         self._wkt = None
-      
+
 
     def _merge_planetodetic_data(self):
         """Merge ellipsoid, datum and planetodic tables
@@ -144,7 +144,7 @@ class Crs2WKT:
 
 
     def __ellipsoid(self, df):
-        """Computes the elliposoid.
+        """Computes the ellipsoid.
         
         Here, we define the ellipsoid of the planet.
 
@@ -186,7 +186,7 @@ class Crs2WKT:
         Returns:
             pandas -- a new table with IAU information with the following reference ellipsoid : sphere, ellipse, triaxial
         """        
-        # load the selected columns and rename them to match the required columns   
+        # load the selected columns and rename them to match the required columns
         ellipsoid = df[['Naif_id', 'Body', 'IAU2015_Semimajor', 'IAU2015_Axisb', 'IAU2015_Semiminor', 'IAU2015_Mean']]
         ellipsoid = ellipsoid.rename(columns = {"Naif_id": "code", "Body":"name", "IAU2015_Semimajor":"semiMajorAxis", "IAU2015_Axisb":"semiMedianAxis", "IAU2015_Semiminor":"semiMinorAxis"})
         ellipsoid['Naif_id'] = ellipsoid['code']
@@ -219,8 +219,8 @@ class Crs2WKT:
 
         # Exceptions to the general cases         
            # case1 =  > Use R_m = (a+b+c)/3 as mean radius when mean radius is not defined 
-        elipseBodyToRemove = ellipsoid.query("IAU2015_Mean == -1 and (type != 'TRIAXIAL' and type != 'SPHERE')")
-        ellipsoid = ellipsoid.drop(elipseBodyToRemove.index) 
+        ellipseBodyToRemove = ellipsoid.query("IAU2015_Mean == -1 and (type != 'TRIAXIAL' and type != 'SPHERE')")
+        ellipsoid = ellipsoid.drop(ellipseBodyToRemove.index) 
         medianSphereToSet = ellipsoid.query("IAU2015_Mean == -1 and type == 'SPHERE'")
         ellipsoid.loc[medianSphereToSet.index, 'IAU2015_Mean'] = (ellipsoid.loc[medianSphereToSet.index, 'semiMajorAxis'] \
             + ellipsoid.loc[medianSphereToSet.index, 'semiMinorAxis'] + ellipsoid.loc[medianSphereToSet.index, 'semiMedianAxis']) / 3
@@ -233,13 +233,13 @@ class Crs2WKT:
         ellipsoid.loc[triaxialBodies.index, 'semiMajorAxis'] = ellipsoid.loc[triaxialBodies.index, 'IAU2015_Mean']
         ellipsoid.loc[triaxialBodies.index, 'semiMinorAxis'] = ellipsoid.loc[triaxialBodies.index, 'IAU2015_Mean']
         ellipsoid.loc[triaxialBodies.index, 'semiMedianAxis'] = ""
-        ellipsoid.loc[triaxialBodies.index, 'remark'] += "Use mean radius as sphere radius for interoperability purpose." 
+        ellipsoid.loc[triaxialBodies.index, 'remark'] += "Use mean radius as sphere radius for interoperability. " 
            # set semi major radius for ellipse bodies
         sphere = ellipsoid.query("type == 'SPHERE'")   
         noTriaxialBodies_index = pd.Index(list(set(sphere.index.tolist()).difference(set(triaxialBodies.index.tolist()))))
         ellipsoid.loc[noTriaxialBodies_index, 'semiMinorAxis'] = ellipsoid.loc[noTriaxialBodies_index, 'semiMajorAxis']
         ellipsoid.loc[noTriaxialBodies_index, 'semiMedianAxis'] = ""
-        ellipsoid.loc[noTriaxialBodies_index, 'remark'] = "Use semi-major radius as sphere for interoperability purpose. "
+        ellipsoid.loc[noTriaxialBodies_index, 'remark'] = "Use semi-major radius as sphere for interoperability. "
           
 
         # Ellipse case
