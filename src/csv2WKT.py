@@ -210,7 +210,7 @@ class Crs2WKT:
         ellipsoid.loc[1::3, 'code'] = ellipsoid.loc[1::3, 'code'] * 100 + 1
         ellipsoid.loc[1::3, 'name'] = ellipsoid.loc[1::3, 'name'].str[:] + ' (' + ellipsoid.loc[1::3, 'version'].apply(str) + ')'        
         ellipsoid.loc[1::3, 'inverseFlatenning'] =  ellipsoid.loc[1::3, 'semiMajorAxis'] / (ellipsoid.loc[1::3, 'semiMajorAxis'] - ellipsoid.loc[1::3, 'semiMinorAxis'])
-        ellipsoid['inverseFlatenning'] = ellipsoid['inverseFlatenning'].replace(np.nan, 0)
+        ellipsoid['inverseFlatenning'] = ellipsoid['inverseFlatenning'].replace(np.inf, 0)
 
         ellipsoid.loc[2::3, 'type'] = 'TRIAXIAL'
         ellipsoid.loc[2::3, 'code'] =  ellipsoid.loc[2::3, 'code'] * 100 + 2
