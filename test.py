@@ -3,6 +3,7 @@ import logging
 import os, sys, subprocess
 from src import Crs2WKT
  
+logging.basicConfig(filename="result.log", filemode="w",level=logging.DEBUG)
 
 class WktTest(unittest.TestCase):
 
