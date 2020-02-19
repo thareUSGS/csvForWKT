@@ -155,7 +155,6 @@ class OgraphicTriaxial(TriaxialBody):
         Returns:
             string -- the coordinate system
         """  
-        assert self._data['longitudeDirection'] == 'east', "longitude Direction must be east, not %s"%self._data['longitudeDirection']
         return self._cs_template.substitute(longitudeDirection=self._data['longitudeDirection'])            
 
 class ProjectedOcentricTriaxial(ProjectedTriaxialBody):
@@ -199,5 +198,4 @@ class ProjectedOgraphicTriaxial(ProjectedTriaxialBody):
         Returns:
             string -- the coordinate system
         """        
-        assert self._data['longitudeDirection'] == 'east', "longitude Direction must be east, not %s"%self._data['longitudeDirection']
         return self._cs_template.substitute(longitudeDirection="east", longAxis="Easting (E)")               

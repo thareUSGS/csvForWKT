@@ -393,7 +393,7 @@ class Crs2WKT:
         ographic['name'] = ographic['name'].str[:] + ' / Ographic'
 
         # longitude ographic is always to East for small bodies, comets, dwarf planets
-        ographicToEast = ographic.query("code >= 900")
+        ographicToEast = ographic.query("code >= 90000")
         ographic.loc[ographicToEast.index, 'longitudeDirection'] = 'east'
 
         odetic = pd.concat([ocentric, ographic])
