@@ -11,7 +11,7 @@ class Body(ABC):
         datum_template = """DATUM["$datum_name",
             ELLIPSOID["$ellipsoide_name", $radius, $inverse_flat, LENGTHUNIT["metre", 1]]$anchor
         ],
-        PRIMEM["Reference Meridian", 0.0, ANGLEUNIT["degree", 0.017453292519943295, ID["EPSG", 9102]]]"""    
+        PRIMEM["Reference Meridian", 0.0, ANGLEUNIT["degree", 0.017453292519943295, ID["EPSG", 9122]]]"""    
         self._anchor = """,\n            ANCHOR["$primeMeridianName: $primeMeridianValue"]"""
         self._datum_template= Template(datum_template)    
         self._data = data    
@@ -107,7 +107,7 @@ class PlanetOgraphicEllipsoid(BiaxialBody):
         cs_template = """CS[ellipsoidal, 2],
     AXIS["Latitude (B)", north, ORDER[1]],
     AXIS["Longitude (L)", $longitudeDirection, ORDER[2]],
-    ANGLEUNIT["degree", 0.017453292519943295, ID["EPSG", 9102]]"""   
+    ANGLEUNIT["degree", 0.017453292519943295, ID["EPSG", 9122]]"""   
         self._cs_template= Template(cs_template)        
 
     def getCs(self):
@@ -119,8 +119,8 @@ class PlanetOcentricEllipsoid(BiaxialBody):
     def __init__(self, data):
         BiaxialBody.__init__(self, data)
         cs_template  = """CS[spherical, 3],
-    AXIS["Planetocentric latitude (U)", north, ORDER[1], ANGLEUNIT["degree", 0.017453292519943295, ID["EPSG", 9102]]],
-    AXIS["Planetocentric longitude (V)", $longitudeDirection, ORDER[2], ANGLEUNIT["degree", 0.017453292519943295, ID["EPSG", 9102]]],
+    AXIS["Planetocentric latitude (U)", north, ORDER[1], ANGLEUNIT["degree", 0.017453292519943295, ID["EPSG", 9122]]],
+    AXIS["Planetocentric longitude (V)", $longitudeDirection, ORDER[2], ANGLEUNIT["degree", 0.017453292519943295, ID["EPSG", 9122]]],
     AXIS["Radius (R)", up, ORDER[3], LENGTHUNIT["metre", 1, ID["EPSG", 9001]]]"""  
         self._cs_template= Template(cs_template)          
 
