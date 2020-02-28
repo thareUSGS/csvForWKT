@@ -3,6 +3,7 @@ import logging
 import os, sys, subprocess
 from src import Crs2WKT
  
+logging.basicConfig(filename="result.log", filemode="w",level=logging.DEBUG)
 
 class WktTest(unittest.TestCase):
 
@@ -10,7 +11,16 @@ class WktTest(unittest.TestCase):
         logging.debug("Start setUp")
         crs = Crs2WKT()
         crs.process()
-        self.wkts = crs.getWkts()    
+        self.wkts = crs.getWkts() 
+        if os.path.isdir("tests_wkt"):
+            for i in os.listdir("tests_wkt"):
+                os.remove(os.path.join("tests_wkt", i))
+            os.rmdir("tests_wkt") 
+        os.mkdir("tests_wkt")  
+        for code, wkt in self.wkts.items():
+            f = open("tests_wkt/"+str(code)+".wkt", "w") 
+            f.write(wkt)
+            f.close()                 
         logging.debug("Stop setUp")     
 
     def test_validation(self):
@@ -47,23 +57,3 @@ class WktTest(unittest.TestCase):
                 self.assertTrue(isSucceed) 
         logging.debug("Stop test_validation")
 
-if __name__ == '__main__':
-    # -log info
-    logging.basicConfig(filename="result.log", filemode="w",level=logging.DEBUG)
-    logging.debug("Computing WKT")
-    crs = Crs2WKT()
-    crs.process()
-    wkts = crs.getWkts() 
-    if os.path.isdir("tests_wkt"):
-        for i in os.listdir("tests_wkt"):
-            os.remove(os.path.join("tests_wkt", i))
-        os.rmdir("tests_wkt") 
-        os.mkdir("tests_wkt")
-
-    logging.debug("Start WKTs generation")
-    for code, wkt in wkts.items():
-        f = open("tests_wkt/"+str(code)+".wkt", "w") 
-        f.write(wkt)
-        f.close() 
-    logging.debug("Stop WKTs generation")   
-    unittest.main()

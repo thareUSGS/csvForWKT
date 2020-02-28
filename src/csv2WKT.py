@@ -209,9 +209,8 @@ class Crs2WKT:
         ellipsoid.loc[1::3, 'type'] = 'ELLIPSE'
         ellipsoid.loc[1::3, 'code'] = ellipsoid.loc[1::3, 'code'] * 100 + 1
         ellipsoid.loc[1::3, 'name'] = ellipsoid.loc[1::3, 'name'].str[:] + ' (' + ellipsoid.loc[1::3, 'version'].apply(str) + ')'        
-        ellipsoid.loc[1::3, 'inverseFlatenning'] =  ellipsoid.loc[0::3, 'semiMajorAxis'] / (ellipsoid.loc[0::3, 'semiMajorAxis'] - ellipsoid.loc[0::3, 'semiMinorAxis'])
-        ellipsoid['inverseFlatenning'] = ellipsoid['inverseFlatenning'].replace(np.nan, 0)
-
+        ellipsoid.loc[1::3, 'inverseFlatenning'] =  ellipsoid.loc[1::3, 'semiMajorAxis'] / (ellipsoid.loc[1::3, 'semiMajorAxis'] - ellipsoid.loc[1::3, 'semiMinorAxis'])
+        ellipsoid['inverseFlatenning'] = ellipsoid['inverseFlatenning'].replace(np.inf, 0)
 
         ellipsoid.loc[2::3, 'type'] = 'TRIAXIAL'
         ellipsoid.loc[2::3, 'code'] =  ellipsoid.loc[2::3, 'code'] * 100 + 2
@@ -394,7 +393,7 @@ class Crs2WKT:
         ographic['name'] = ographic['name'].str[:] + ' / Ographic'
 
         # longitude ographic is always to East for small bodies, comets, dwarf planets
-        ographicToEast = ographic.query("code >= 900")
+        ographicToEast = ographic.query("code >= 90000")
         ographic.loc[ographicToEast.index, 'longitudeDirection'] = 'east'
 
         odetic = pd.concat([ocentric, ographic])
@@ -444,24 +443,24 @@ class Crs2WKT:
         return self._wkt    
 
 
-    def save(self):       
+    def save(self):    
+        if os.path.isdir("results"):
+            for i in os.listdir("results"):
+                os.remove(os.path.join("results", i))
+            os.rmdir("results") 
+        os.mkdir("results")           
         ellipsoid = self._ellipsoid[['authority', 'version', 'code', 'name', 'semiMajorAxis', 'semiMedianAxis', 'semiMinorAxis', 'inverseFlatenning', 'remark']]
-        ellipsoid.to_csv(r'ellipsoid.csv', index = False)
+        ellipsoid.to_csv(r'results/ellipsoid.csv', index = False)
 
         datum = self._datum[['authority', 'version', 'code', 'name', 'body', 'ellipsoid', 'primeMeridianName', 'primeMeridianValue']]
-        datum.to_csv(r'datum.csv', index = False)
+        datum.to_csv(r'results/datum.csv', index = False)
 
         planetodetic = self._planetodetic[['authority', 'version', 'code', 'name', 'datum', 'csType', 'longitudeDirection']]
-        planetodetic.to_csv(r'planetodetic.csv', index = False)
+        planetodetic.to_csv(r'results/planetodetic.csv', index = False)
 
         projection = self._projection[['authority', 'version', 'code', 'name', 'baseCRS', 'method', 'parameter1Name', 'parameter1Value', 'parameter2Name', 'parameter2Value', 'parameter3Name', 'parameter3Value', 'parameter4Name', 'parameter4Value', 'parameter5Name', 'parameter5Value', 'parameter6Name', 'parameter6Value']]
-        projection.to_csv(r'projection.csv', index = False)
+        projection.to_csv(r'results/projection.csv', index = False)
 
-        wkts = self.getWkt()
-        for code, wkt in dict.items():
+        wkts = self.getWkts()
+        for code, wkt in wkts.items():
             print(wkt)
-
-if __name__ == "__main__":
-    crs = Crs2WKT()
-    crs.process()
-    crs.save()
