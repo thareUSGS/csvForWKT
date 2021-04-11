@@ -1,4 +1,4 @@
-from src import Crs2WKT
+from wkt import Crs2WKT
 
 if __name__ == "__main__":
     crs = Crs2WKT()

@@ -1,4 +1,6 @@
 *.pyc
-src/__pycache__/
+wkt/__pycache__/
+__pycache__/
+docs/build/
 .vscode/
 
