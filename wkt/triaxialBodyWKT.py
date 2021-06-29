@@ -14,7 +14,9 @@ class TriaxialBody(IGeodeticCRS):
             TRIAXIAL["$ellipsoide_name", $semi_major, $semi_median, $semi_minor, LENGTHUNIT["metre", 1, ID["EPSG", 9001]]]$anchor
         ],
         PRIMEM["Reference Meridian", 0.0, ANGLEUNIT["degree", 0.017453292519943295, ID["EPSG", 9122]]]"""
-        anchor_template_str: str = """,\n            ANCHOR["$primeMeridianName: $primeMeridianValue"]"""
+        anchor_template_str: str = (
+            """,\n            ANCHOR["$primeMeridianName: $primeMeridianValue"]"""
+        )
         datum_template: Template = Template(datum_template_str)
         anchor_template: Template = Template(anchor_template_str)
         self.__datum: str = self.__compute_datum(datum_template, anchor_template, data)
@@ -161,8 +163,7 @@ class ProjectedTriaxialBody(TriaxialBody, IProjectedCRS):
 
 
 class OcentricTriaxial(TriaxialBody):
-    """Ocentric triaxial body
-    """
+    """Ocentric triaxial body"""
 
     def __init__(self, data: pd.Series):
         """Init
@@ -195,8 +196,7 @@ class OcentricTriaxial(TriaxialBody):
 
 
 class OgraphicTriaxial(TriaxialBody):
-    """Ographic triaxial body
-    """
+    """Ographic triaxial body"""
 
     def __init__(self, data: pd.Series):
         """Init
@@ -227,8 +227,7 @@ class OgraphicTriaxial(TriaxialBody):
 
 
 class ProjectedOcentricTriaxial(ProjectedTriaxialBody):
-    """Projected planetocentric CRS for a triaxial body
-    """
+    """Projected planetocentric CRS for a triaxial body"""
 
     def __init__(self, data: pd.Series):
         """Init
@@ -256,8 +255,7 @@ class ProjectedOcentricTriaxial(ProjectedTriaxialBody):
 
 
 class ProjectedOgraphicTriaxial(ProjectedTriaxialBody):
-    """Projected planetographic CRS for a triaxial body
-    """
+    """Projected planetographic CRS for a triaxial body"""
 
     def __init__(self, data: pd.Series):
         """Init
@@ -279,4 +277,3 @@ class ProjectedOgraphicTriaxial(ProjectedTriaxialBody):
         return self.cs_template.substitute(
             longitudeDirection="east", longAxis="Easting (E)"
         )
-

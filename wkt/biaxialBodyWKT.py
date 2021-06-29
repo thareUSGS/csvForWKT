@@ -29,7 +29,7 @@ class BiaxialBody(IGeodeticCRS):
         Example:
         GEODCRS["Mars (2015) / Ographic",
             DATUM["Mars (2015)",
-                    ELLIPSOID["Mars (2015)", 3396190.0, 169.8944472236118, LENGTHUNIT["metre", 1]],
+                    ELLIPSOID["Mars (2015)", 3396190.0, 169.8944472236118, LENGTHUNIT["metre", 1, ID["EPSG", 9001]]],
                     ANCHOR["Viking 1 lander: 47.951370000000004 W"]
                 ],
                 PRIMEM["Reference Meridian", 0.0, ANGLEUNIT["degree", 0.017453292519943295, ID["EPSG", 9122]]],
@@ -49,10 +49,12 @@ class BiaxialBody(IGeodeticCRS):
         """
         IGeodeticCRS.__init__(self)
         datum_template_str: str = """DATUM["$datum_name",
-            ELLIPSOID["$ellipsoide_name", $radius, $inverse_flat, LENGTHUNIT["metre", 1]]$anchor
+            ELLIPSOID["$ellipsoide_name", $radius, $inverse_flat, LENGTHUNIT["metre", 1, ID["EPSG", 9001]]]$anchor
         ],
         PRIMEM["Reference Meridian", 0.0, ANGLEUNIT["degree", 0.017453292519943295, ID["EPSG", 9122]]]"""
-        anchor_template_str: str = """,\n            ANCHOR["$primeMeridianName: $primeMeridianValue"]"""
+        anchor_template_str: str = (
+            """,\n            ANCHOR["$primeMeridianName: $primeMeridianValue"]"""
+        )
         datum_template: Template = Template(datum_template_str)
         anchor_template: Template = Template(anchor_template_str)
         self.__datum: str = self.__compute_datum(datum_template, anchor_template, data)
@@ -67,7 +69,7 @@ class BiaxialBody(IGeodeticCRS):
 
             Example:
             DATUM["Mars (2015)",
-                    ELLIPSOID["Mars (2015)", 3396190.0, 169.8944472236118, LENGTHUNIT["metre", 1]],
+                    ELLIPSOID["Mars (2015)", 3396190.0, 169.8944472236118, LENGTHUNIT["metre", 1, ID["EPSG", 9001]]],
                     ANCHOR["Viking 1 lander: 47.951370000000004 W"]
                 ],
                 PRIMEM["Reference Meridian", 0.0, ANGLEUNIT["degree", 0.017453292519943295, ID["EPSG", 9122]]],
@@ -150,7 +152,7 @@ class ProjectedBiaxialBody(BiaxialBody, IProjectedCRS):
         PROJCRS["Equirectangular, clon = 0",
             BASEGEOGCRS["Equirectangular, clon = 0 / Ographic",
                 DATUM["Mars (2015)",
-                    ELLIPSOID["Mars (2015)", 3396190.0, 169.8944472236118, LENGTHUNIT["metre", 1]],
+                    ELLIPSOID["Mars (2015)", 3396190.0, 169.8944472236118, LENGTHUNIT["metre", 1, ID["EPSG", 9001]]],
                     ANCHOR["Viking 1 lander: 47.951370000000004"]
                 ],
                 PRIMEM["Reference Meridian", 0.0, ANGLEUNIT["degree", 0.017453292519943295, ID["EPSG", 9122]]]
@@ -313,7 +315,7 @@ class PlanetOgraphicEllipsoid(BiaxialBody):
         Example:
         GEODCRS["Mars (2015) / Ographic",
             DATUM["Mars (2015)",
-                    ELLIPSOID["Mars (2015)", 3396190.0, 169.8944472236118, LENGTHUNIT["metre", 1]],
+                    ELLIPSOID["Mars (2015)", 3396190.0, 169.8944472236118, LENGTHUNIT["metre", 1, ID["EPSG", 9001]]],
                     ANCHOR["Viking 1 lander: 47.951370000000004 W"]
                 ],
                 PRIMEM["Reference Meridian", 0.0, ANGLEUNIT["degree", 0.017453292519943295, ID["EPSG", 9122]]],
@@ -358,7 +360,7 @@ class PlanetOcentricEllipsoid(BiaxialBody):
         Example:
         GEODCRS["Mars (2015) / Ocentric",
             DATUM["Mars (2015)",
-                    ELLIPSOID["Mars (2015)", 3396190.0, 169.8944472236118, LENGTHUNIT["metre", 1]],
+                    ELLIPSOID["Mars (2015)", 3396190.0, 169.8944472236118, LENGTHUNIT["metre", 1, ID["EPSG", 9001]]],
                     ANCHOR["Viking 1 lander: 47.951370000000004"]
                 ],
                 PRIMEM["Reference Meridian", 0.0, ANGLEUNIT["degree", 0.017453292519943295, ID["EPSG", 9122]]],
@@ -404,7 +406,7 @@ class ProjectedOcentricEllipsoid(ProjectedBiaxialBody):
         PROJCRS["Equirectangular, clon = 0",
             BASEGEODCRS["Equirectangular, clon = 0 / Ocentric",
                 DATUM["Mars (2015)",
-                    ELLIPSOID["Mars (2015)", 3396190.0, 169.8944472236118, LENGTHUNIT["metre", 1]],
+                    ELLIPSOID["Mars (2015)", 3396190.0, 169.8944472236118, LENGTHUNIT["metre", 1, ID["EPSG", 9001]]],
                     ANCHOR["Viking 1 lander: 47.951370000000004"]
                 ],
                 PRIMEM["Reference Meridian", 0.0, ANGLEUNIT["degree", 0.017453292519943295, ID["EPSG", 9122]]]
@@ -464,7 +466,7 @@ class ProjectedOgraphicEllipsoid(ProjectedBiaxialBody):
         PROJCRS["Equirectangular, clon = 0",
             BASEGEOGCRS["Equirectangular, clon = 0 / Ographic",
                 DATUM["Mars (2015)",
-                    ELLIPSOID["Mars (2015)", 3396190.0, 169.8944472236118, LENGTHUNIT["metre", 1]],
+                    ELLIPSOID["Mars (2015)", 3396190.0, 169.8944472236118, LENGTHUNIT["metre", 1, ID["EPSG", 9001]]],
                     ANCHOR["Viking 1 lander: 47.951370000000004"]
                 ],
                 PRIMEM["Reference Meridian", 0.0, ANGLEUNIT["degree", 0.017453292519943295, ID["EPSG", 9122]]]
