@@ -19,22 +19,22 @@ semantic of the CRS definition. In addition to that, the use of this standard is
 
 These instructions will get you a copy of the project up and running on your local machine.
 
-### 3.1- Prerequisities
 
-What things you need to install the software and how to install them
-
-```
-numpy
-pandas
-```
-
-### 3.2 - Running the script
+### 3.1 - Install the dependencies and run the script
 
 
 ```
 git clone https://github.com/PlanetMap/csvForWKT.git 
 cd csvForWKT
 ```
+
+Install the dependencies:
+
+```
+pip install -r requirements.txt
+```
+
+Run the script
 
 ```
 python3 ./main.py > result.wkts
@@ -43,7 +43,7 @@ python3 ./main.py > result.wkts
 A results directory will be created. This directory contains the CSV files. the WKT-crs are defined in the 
 result.wkts file
 
-### 3.3 Running the tests
+### 3.2 Running the tests
 
 ```
 python3 -m unittest -v test

@@ -1,59 +1,69 @@
 import unittest
 import logging
-import os, sys, subprocess
-from src import Crs2WKT
- 
-logging.basicConfig(filename="result.log", filemode="w",level=logging.DEBUG)
+import os, subprocess
+from wkt import Crs2WKT
+
+logging.basicConfig(filename="result.log", filemode="w", level=logging.DEBUG)
+
 
 class WktTest(unittest.TestCase):
-
     def setUp(self):
         logging.debug("Start setUp")
         crs = Crs2WKT()
         crs.process()
-        self.wkts = crs.getWkts() 
+        self.wkts = crs.getWkts()
         if os.path.isdir("tests_wkt"):
             for i in os.listdir("tests_wkt"):
                 os.remove(os.path.join("tests_wkt", i))
-            os.rmdir("tests_wkt") 
-        os.mkdir("tests_wkt")  
+            os.rmdir("tests_wkt")
+        os.mkdir("tests_wkt")
         for code, wkt in self.wkts.items():
-            f = open("tests_wkt/"+str(code)+".wkt", "w") 
+            f = open("tests_wkt/" + str(code) + ".wkt", "w")
             f.write(wkt)
-            f.close()                 
-        logging.debug("Stop setUp")     
+            f.close()
+        logging.debug("Stop setUp")
 
     def test_validation(self):
         """
         Test that WKT is valid
         """
         logging.debug("Start test_validation")
-        i=0
+        i = 0
         for code, wkt in self.wkts.items():
             with self.subTest(code=code):
-                i = i+1
-                logging.debug("--> Processing %s.wkt - %s/%s", code, i, len(self.wkts.items()))
+                i = i + 1
+                logging.debug(
+                    "--> Processing %s.wkt - %s/%s", code, i, len(self.wkts.items())
+                )
                 dirpath = os.getcwd()
-                file = dirpath+"/tests_wkt/"+str(code)+".wkt"
-                stream = subprocess.Popen(["docker", 
-                "run", "--rm", 
-                "-v", "/home:/home", 
-                "osgeo/gdal:alpine-small-latest", "gdalsrsinfo",
-                "-V", file],
-                stdout=subprocess.PIPE,
-                stderr=subprocess.STDOUT)                
-                info, stderr = stream.communicate()  
+                file = dirpath + "/tests_wkt/" + str(code) + ".wkt"
+                stream = subprocess.Popen(
+                    [
+                        "docker",
+                        "run",
+                        "--rm",
+                        "-v",
+                        "/home:/home",
+                        "osgeo/gdal:alpine-small-latest",
+                        "gdalsrsinfo",
+                        "-V",
+                        file,
+                    ],
+                    stdout=subprocess.PIPE,
+                    stderr=subprocess.STDOUT,
+                )
+                info, stderr = stream.communicate()
                 info = info.decode("utf-8")
 
                 lines = info.split("\n")
                 warning = [s for s in lines if ("ERROR" in s)]
 
-                if len(warning) > 0 :
-                    logging.warning("\t%s",warning)
+                if len(warning) > 0:
+                    logging.warning("\t%s", warning)
                 isSucceed = "Succeeds" in info
                 logging.debug("\tisValid %s", isSucceed)
                 if not isSucceed:
-                    logging.error("\t%s",info)
-                self.assertTrue(isSucceed) 
+                    logging.error("\t%s", info)
+                self.assertTrue(isSucceed)
         logging.debug("Stop test_validation")
 
